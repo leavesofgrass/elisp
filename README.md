@@ -1,5 +1,7 @@
 # Emacs configuration
 
+For a detailed guide take a look at ([config-breakdown.org](https://github.com/leavesofgrass/elisp/blob/master/config-breakdown.org)).
+
 I’ve broken my Emacs configuration down into different files.
 
 ### early-init.el
