@@ -2,30 +2,32 @@
 #+AUTHOR: Jon Pielaet
 #+OPTIONS: date:nil
 #+LATEX_HEADER: \usepackage[margin=0.3in]{geometry}
-	
-/This is an example of a GNU Emacs configuration for use/ /with the Emacspeak text-to-speech system./
-/Emacspeak is a software package that extends GNU Emacs (Emacs)/
-/with powerful text-to-speech capabilities and enables people/
-/with limited or no vision to use Emacs./
-/Although Emacs is a text editor, it can also be programmed/ 
-/to do many other tasks. As shown by this configuration,/
 
-/Emacs can be used for just about anything./
-/From staying organized with todo lists, to reading news, chatting online,/
-/controling media players, or using multiple terminal emulators,/
-/you can do all of it with Emacs./
-   
-/This configuration  has been customized for use with many/
-/programming languages and applications./
+#+BEGIN_CENTER
 
-/The initialization (init) of Emacs has been divided into/
-/different files based on the data structures of the/
-/Emacs Lisp language. (elisp) Each configuration file is included/
-/below and can be used as a working example of how to use elisp/
-/to customize Emacs./
+This is an example of a GNU Emacs configuration for use with the Emacspeak text-to-speech system.
+Emacspeak is a software package that extends GNU Emacs (Emacs)
+with powerful text-to-speech capabilities and enables people
+with limited or no vision to use Emacs.
 
+Although Emacs is a text editor, it can also be programmed 
+to do many other tasks. As shown by this configuration,
+Emacs can be used for just about anything.
+From staying organized with todo lists, to reading news, chatting online,
+controling media players, or using multiple terminal emulators,
+you can do all of it with Emacs.
 
-* Background 
+This configuration  has been customized for use with many
+programming languages and applications.
+
+The initialization (init) of Emacs has been divided into
+different files based on the data structures of the
+Emacs Lisp language. (elisp) Each configuration file is included
+below and can be used as a working example of how to use elisp
+to customize Emacs.
+#+END_CENTER
+
+* Background
 In 2015, I started diving deeper into [[https://www.gnu.org/software/emacs/][GNU Emacs]] because I saw its
 potential as an [[https://www.atia.org/at-resources/what-is-at/][assistive technology]]
 Not only as a way of providing better access to books
