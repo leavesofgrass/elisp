@@ -9,12 +9,12 @@
 /with powerful text-to-speech capabilities and enables people/
 /with limited or no vision to use Emacs./
 /Although Emacs is a text editor, it can also be programmed/ 
-/to do many other tasks. As shown by this configuration,/
+to do many other tasks. As shown by this configuration,
 
 /Emacs can be used for just about anything./
-/From staying organized with todo lists, to reading news, chatting online,/
-/controling media players, or using multiple terminal emulators,/
-/you can do all of it with Emacs./
+/From staying organized with todo lists, to reading news, chatting online,
+/controling media players, or using multiple terminal emulators,
+you can do all of it with Emacs./
    
 /This configuration  has been customized for use with many/
 /programming languages and applications./
@@ -119,7 +119,6 @@ sed -e "\$aDTK_PROGRAM=espeak" ~/.bashrc
 #+BEGIN_SRC bash :tangle yes
 source ~/.bashrc
 #+END_SRC
-
 
 * Clone My Configuration Repository
 Cloning a copy of the repository will make it easy to use the configuration without needing to make all the files from scratch.
@@ -1361,9 +1360,7 @@ I would like to thank the following people for their help, and wisdom:
 [[http://emacspeak.sourceforge.net/raman/][T.V. Raman]],
 [[http://xahlee.org/][Xah Lee]]
 
-* License 
+* License
+This work is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) license.
 
-@@html:<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.@@
-@@html:<br>@@
-Made with [[https://orgmode.org/][org-mode]] and [[https://www.latex-project.org/][\(\LaTeX\)]]
-
+https://creativecommons.org/licenses/by/4.0/
