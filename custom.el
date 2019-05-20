@@ -58,6 +58,7 @@
  '(paradox-async-display-buffer-function nil)
  '(paradox-automatically-star t)
  '(paradox-execute-asynchronously t)
+ '(paradox-github-token t)
  '(tts-strip-octals nil))
 
 
