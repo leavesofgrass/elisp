@@ -74,7 +74,6 @@ cmake-mode ;; https://github.com/Kitware/CMake
 coffee-mode ;; http://github.com/defunkt/coffee-mode/
 company ;; http://company-mode.github.io/
 company-arduino ;; https://github.com/yuutayamada/company-arduino
-company-auctex ;; https://github.com/alexeyr/company-auctex/
 company-c-headers ;; https://github.com/randomphrase/company-c-headers
 company-dict ;; https://github.com/hlissner/emacs-company-dict
 company-ghc ;; https://github.com/iquiw/company-ghc
