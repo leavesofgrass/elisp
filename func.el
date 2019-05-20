@@ -163,19 +163,3 @@
   (interactive)
   (load-file "~/emacspeak/lisp/emacspeak-setup.el")
   )
-
-;; dired-sidebar
-;; dired-sidebar-toggle-sidebar
-;; is also bound to C-<Esc>
-;; in keybindings.el
-
-(use-package dired-sidebar
-  :load-path "What you got from pwd."
-  :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
-  :ensure nil
-  :commands (dired-sidebar-toggle-sidebar)
-  :config
-  (use-package all-the-icons-dired
-    ;; M-x all-the-icons-install-fonts
-    :ensure t
-    :commands (all-the-icons-dired-mode)))
