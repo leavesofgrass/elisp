@@ -405,6 +405,7 @@ paradox))
       
 ;; email
 
+(setq user-full-name "Jon Pielaet")
 (setq user-mail-address "jon@pielaet.net")
 
 
@@ -1003,18 +1004,15 @@ org-gcal-file-alist '(("jon@pielaet.net" . "~/Dropbox/Documents/Orgzly/gcal.org"
 the initialization of the Emacspeak text-to-speech subsystem.)
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-
 ;; smex
 
 (smex-initialize)
 
 ;; global modes
 
-(global-company-mode)
 (global-magit-file-mode)
 (global-prettify-symbols-mode)
 (solaire-global-mode)
-(smartparens-global-mode)
 (global-undo-tree-mode)
 (global-git-gutter+-mode)
 
@@ -1030,8 +1028,86 @@ the initialization of the Emacspeak text-to-speech subsystem.)
 ;; This package is NOT in MELPA
 ;; install it manually and then uncomment these lines
 
-;;(add-to-list 'load-path "~/.emacs.d/elpa/livedown")
-;;(load "livedown")
+(add-to-list 'load-path "~/.emacs.d/elpa/livedown")
+(load "livedown")
+
+;; use-package
+
+(use-package avy
+  :ensure t
+  :bind
+  ("C-=" . avy-goto-char)
+  :config
+  (setq avy-background t))
+
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'after-init-hook #'global-company-mode))
+
+(use-package crux
+  :ensure t
+  :bind
+  ("C-k" . crux-smart-kill-line)
+  ("C-c n" . crux-cleanup-buffer-or-region)
+  ("C-c f" . crux-recentf-find-file)
+  ("C-a" . crux-move-beginning-of-line))
+
+(use-package expand-region
+  :ensure t
+  :bind ("M-m" . er/expand-region))
+
+(use-package flycheck
+  :ensure t
+  :config
+  (add-hook 'after-init-hook #'global-flycheck-mode))
+
+(use-package helm
+  :ensure t
+  :defer 2
+  :bind
+  ("C-x C-f" . helm-find-files)
+  ("M-y" . helm-show-kill-ring)
+  ("C-x b" . helm-mini)
+  :config
+  (require 'helm-config)
+  (helm-mode 1)
+  (setq helm-split-window-inside-p t
+    helm-move-to-line-cycle-in-source t)
+  (setq helm-autoresize-max-height 0)
+  (setq helm-autoresize-min-height 20)
+  (helm-autoresize-mode 1)
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
+  (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+
+(use-package projectile
+  :ensure t
+  :bind
+  (("C-c p f" . helm-projectile-find-file)
+   ("C-c p p" . helm-projectile-switch-project)
+   ("C-c p s" . projectile-save-project-buffers))
+  :config
+  (projectile-mode +1)
+)
+
+(use-package helm-projectile
+  :ensure t
+  :config
+  (helm-projectile-on))
+
+(use-package smartparens
+  :ensure t
+  :config
+  (progn
+    (require 'smartparens-config)
+    (smartparens-global-mode 1)
+    (show-paren-mode t)))
+
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode +1))
 
 #+END_SRC
 

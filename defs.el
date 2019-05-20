@@ -23,6 +23,7 @@
 
 ;; email
 
+(setq user-full-name "Jon Pielaet")
 (setq user-mail-address "jon@pielaet.net")
 
 
