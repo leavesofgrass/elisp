@@ -1,4 +1,4 @@
-# Emacs configuration
+# My Emacs Configuration
 
 For a detailed guide take a look at [config-breakdown.org](https://github.com/leavesofgrass/elisp/blob/master/config-breakdown.org).
 
