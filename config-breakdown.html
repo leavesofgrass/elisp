@@ -1,0 +1,1879 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-05-19 Sun 17:41 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>A Breakdown of My Emacs Configuration</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Jon Pielaet" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">A Breakdown of My Emacs Configuration</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org8ada876">1. Background</a></li>
+<li><a href="#orgc07101d">2. Building Emacs and Emacspeak</a>
+<ul>
+<li><a href="#org80486db">2.1. Required Disk Space</a></li>
+<li><a href="#orgedd0679">2.2. Compiling Emacs with Emacspeak on 64-bit Ubuntu</a></li>
+</ul>
+</li>
+<li><a href="#org1fbb836">3. Clone My Configuration Repository</a></li>
+<li><a href="#orge678aa2">4. Installing the Emacs Lisp Packages</a>
+<ul>
+<li><a href="#org47b714a">4.1. Installing the Package Manager</a></li>
+<li><a href="#org29a3459">4.2. Installing the Remaining Packages</a></li>
+</ul>
+</li>
+<li><a href="#org37dbb61">5. early-init.el</a></li>
+<li><a href="#orgce5d27f">6. .emacs</a>
+<ul>
+<li><a href="#orgf6586f7">6.1. package-repo.el</a></li>
+<li><a href="#org15b7449">6.2. load-theme.el</a></li>
+<li><a href="#org86db0a0">6.3. custom.el</a></li>
+<li><a href="#orga894958">6.4. defs.el</a></li>
+<li><a href="#orgb065608">6.5. func.el</a></li>
+<li><a href="#orgf30c1c5">6.6. auto-mode-alist.el</a></li>
+<li><a href="#orgdf46ad8">6.7. hooks.el</a></li>
+<li><a href="#orgcc6bf56">6.8. keybindings.el</a></li>
+<li><a href="#org9c8c74c">6.9. modes.el</a></li>
+<li><a href="#org716550d">6.10. init-packages.el</a></li>
+<li><a href="#org5ec2046">6.11. ensure-packages.el</a></li>
+</ul>
+</li>
+<li><a href="#org84afac8">7. A Thank You</a></li>
+<li><a href="#orgdafe371">8. License</a></li>
+</ul>
+</div>
+</div>
+<div class="org-center">
+<p>
+	
+<i>This is an example of a GNU Emacs configuration for use</i> <i>with the Emacspeak text-to-speech system.</i>
+<i>Emacspeak is a software package that extends GNU Emacs (Emacs)</i>
+<i>with powerful text-to-speech capabilities and enables people</i>
+<i>with limited or no vision to use Emacs.</i>
+<i>Although Emacs is a text editor, it can also be programmed</i> 
+<i>to do many other tasks. As shown by this configuration,</i>
+</p>
+
+<p>
+<i>Emacs can be used for just about anything.</i>
+<i>From staying organized with todo lists, to reading news, chatting online,</i>
+<i>controling media players, or using multiple terminal emulators,</i>
+<i>you can do all of it with Emacs.</i>
+</p>
+
+<p>
+<i>This configuration  has been customized for use with many</i>
+<i>programming languages and applications.</i>
+</p>
+
+<p>
+<i>The initialization (init) of Emacs has been divided into</i>
+<i>different files based on the data structures of the</i>
+<i>Emacs Lisp language. (elisp) Each configuration file is included</i>
+<i>below and can be used as a working example of how to use elisp</i>
+<i>to customize Emacs.</i>
+</p>
+</div>
+
+<div id="outline-container-org8ada876" class="outline-2">
+<h2 id="org8ada876"><span class="section-number-2">1</span> Background</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+In 2015, I started diving deeper into <a href="https://www.gnu.org/software/emacs/">GNU Emacs</a> because I saw its
+potential as an <a href="https://www.atia.org/at-resources/what-is-at/">assistive technology</a>
+Not only as a way of providing better access to books
+and code for my students and clients, many of whom are blind, but also as a
+tool for creating more accessible content. <a href="https://www.regular-expressions.info/">Regular expressions</a> and modes
+like <a href="https://orgmode.org/">Org</a>, <a href="https://jblevins.org/projects/markdown-mode/">Markdown</a>, and <a href="https://www.gnu.org/software/auctex/">AucTex</a> are extremely useful in the 
+production of <a href="https://www.queensu.ca/accessibility/how-info/what-are-alternate-formats">alternate formats</a>.
+</p>
+
+<p>
+Although I had used Emacs as a vanilla text editor off and on since the
+1990's, I didn't learn anything about the underlying Emacs Lisp (elisp) 
+programming language until the end of 2015, when I got a hardcopy Emacs 
+manual, quit my day job, and grew the requisite "LISP" beard.
+Although the learning curve is very high, Emacs rewards the user with an almost unlimited amount of customization.
+This means that if you don't like how something works, you can change it yourself. It's this extensibility that gives Emacs and Emacspeak their seamingly magical powers.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc07101d" class="outline-2">
+<h2 id="orgc07101d"><span class="section-number-2">2</span> Building Emacs and Emacspeak</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Before you are able to make use of the elisp in this configuration you will need to have Emacs
+and <a href="http://emacspeak.sourceforge.net/">Emacspeak</a> installed.
+I like to use the latest versions of both so I build from the source code.
+</p>
+</div>
+
+<div id="outline-container-org80486db" class="outline-3">
+<h3 id="org80486db"><span class="section-number-3">2.1</span> Required Disk Space</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+You should have about <b><b>two gigabytes</b></b> of storage free to be able to build the source code and run the configuration.
+Although the final installed footprint is a much smaller, <b><b>300 megabytes</b></b> nominally, the development libraries and build depenencies create bulk. These can of course be remove once the installation is complete, if they are no longer needed. This can greatly conserve disk space.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgedd0679" class="outline-3">
+<h3 id="orgedd0679"><span class="section-number-3">2.2</span> Compiling Emacs with Emacspeak on 64-bit Ubuntu</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+<i>(This example is for 64-bit Ubuntu but it may work on other <a href="https://distrowatch.com/search.php?basedon=Debian">Debian-based GNU/Linux distrobutions.</a>)</i>
+</p>
+
+
+<p>
+<code>1. Make source code repositories available to apt by uncommenting</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo sed -i <span style="color: #7bc275;">'s/# deb-src/deb-src/g'</span> /etc/apt/sources.list
+</pre>
+</div>
+
+<p>
+<code>2. Update sources list</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">sudo apt update
+</pre>
+</div>
+
+<p>
+<code>3. Upgrade any packages that are out-of-date</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">sudo apt upgrade -y
+</pre>
+</div>
+
+<p>
+<code>4. Install some dependencies</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">sudo apt install git tclx8.4-dev -y &amp;&amp; sudo apt-get build-dep emacs25 emacspeak -y
+</pre>
+</div>
+<p>
+<code>5. Fetch GNU Emacs source code with git</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">git clone -b master https://git.savannah.gnu.org/git/emacs.git ~/
+</pre>
+</div>
+<p>
+<code>6. Fetch Emacspeak source code with git</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">git clone https://github.com/tvraman/emacspeak ~/
+</pre>
+</div>
+
+<p>
+<code>7. Build and install GNU Emacs</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #C57BDB;">cd</span> ~/emacs
+./autogen.sh &amp;&amp; ./configure --with-imagemagick &amp;&amp; make &amp;&amp; sudo make install
+</pre>
+</div>
+<p>
+<code>8. Build Emacspeak and install</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #C57BDB;">cd</span> ~/emacspeak 
+make &amp;&amp; sudo make install
+</pre>
+</div>
+
+<p>
+<code>9. Build optional speech server (I use IBM ViaVoice Outloud which gets installed before this)</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #C57BDB;">cd</span> ~/emacspeak
+make outloud &amp;&amp; sudo make install
+</pre>
+</div>
+
+<p>
+<code>10. Add an environment variable to your shell config file for the speech synthesizer you want to use.</code>
+</p>
+
+<p>
+<code>(change espeak to outloud if you want to use outloud!)</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sed -e <span style="color: #7bc275;">"\$aexport DTK_PROGRAM"</span> ~/.bashrc
+
+sed -e <span style="color: #7bc275;">"\$aDTK_PROGRAM=espeak"</span> ~/.bashrc
+</pre>
+</div>
+
+<p>
+<code>11. Source the config file so the shell recognizes the changes</code>
+<code>(or logout and login again)</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #C57BDB;">source</span> ~/.bashrc
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org1fbb836" class="outline-2">
+<h2 id="org1fbb836"><span class="section-number-2">3</span> Clone My Configuration Repository</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Cloning a copy of the repository will make it easy to use the configuration without needing to make all the files from scratch.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">git clone https://github.com/leavesofgrass/elisp ~/
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge678aa2" class="outline-2">
+<h2 id="orge678aa2"><span class="section-number-2">4</span> Installing the Emacs Lisp Packages</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+The very first time you run Emacs, you will want to tell the software
+to download some packages before you can use the configuration.
+I suggest installing the rest of the packages before you use Emacs too.
+</p>
+</div>
+<div id="outline-container-org47b714a" class="outline-3">
+<h3 id="org47b714a"><span class="section-number-3">4.1</span> Installing the Package Manager</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Running the following from the command line will define package repos and install
+the paradox package manager.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">emacs -Q -batch -l ~/elisp/package-repo.el ~/elisp/init-packages.el
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org29a3459" class="outline-3">
+<h3 id="org29a3459"><span class="section-number-3">4.2</span> Installing the Remaining Packages</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+After paradox is installed, running the following will install the rest of the elisp packages asynchronously.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">emacs -Q -batch -l ~/elisp/package-repo.el ~/elisp/ensure-packages.el
+</pre>
+</div>
+
+<p>
+Doing this before trying to use Emacs will help prevent any issues due to missing packages.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org37dbb61" class="outline-2">
+<h2 id="org37dbb61"><span class="section-number-2">5</span> early-init.el</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+(An elisp file for code to evaluate before any packages start.)
+</p>
+
+<p>
+Usually stored in ~/.emacs.d/
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #62686E;">;; </span><span style="color: #62686E;">remove some bars</span>
+
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">no blinking cursor</span>
+
+(blink-cursor-mode 0)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">no init messages</span>
+
+(<span style="color: #51afef;">setq</span> initial-scratch-message <span style="color: #7bc275;">""</span>)
+(<span style="color: #51afef;">setq</span> inhibit-startup-message t)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">use a visual bell</span>
+
+(<span style="color: #51afef;">setq</span> visible-bell t)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Shorten Yes/No Dialogs</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Type Y or N instead of yes or no</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">in the minibuffer</span>
+
+(<span style="color: #51afef;">defalias</span> '<span style="color: #5cEfFF;">yes-or-no-p</span> 'y-or-n-p)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">always load the newest byte code</span>
+
+(<span style="color: #51afef;">setq</span> load-prefer-newer t)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">prefer utf-8 for both display and editing</span>
+
+(prefer-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-default buffer-file-coding-system 'utf-8-unix)
+(set-default-coding-systems 'utf-8-unix)
+(prefer-coding-system 'utf-8-unix)
+(set-default buffer-file-coding-system 'utf-8-unix)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgce5d27f" class="outline-2">
+<h2 id="orgce5d27f"><span class="section-number-2">6</span> .emacs</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+~/.emacs or ~/.emacs.d/init.el
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #62686E;">;; </span><span style="color: #62686E;">This file bootstraps the configuration, which is divided into</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">a number of other files.</span>
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Package repositories</span>
+
+(<span style="color: #51afef;">setq</span> package-repo-file <span style="color: #7bc275;">"~/elisp/package-repo.el"</span>)
+(load package-repo-file)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Theme</span>
+
+(<span style="color: #51afef;">setq</span> load-theme-file <span style="color: #7bc275;">"~/elisp/load-theme.el"</span>)
+(load load-theme-file)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Set by customize interface</span>
+
+(<span style="color: #51afef;">setq</span> custom-file <span style="color: #7bc275;">"~/elisp/custom.el"</span>)
+(load custom-file)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Variable definitions </span>
+(<span style="color: #51afef;">setq</span> defs-file <span style="color: #7bc275;">"~/elisp/defs.el"</span>)
+(load defs-file)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Custom functions</span>
+(<span style="color: #51afef;">setq</span> func-file <span style="color: #7bc275;">"~/elisp/func.el"</span>)
+(load func-file)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">auto-mode-alist</span>
+(<span style="color: #51afef;">setq</span> auto-mode-file <span style="color: #7bc275;">"~/elisp/auto-mode-alist.el"</span>)
+(load auto-mode-file)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Hooks</span>
+(<span style="color: #51afef;">setq</span> hooks-file <span style="color: #7bc275;">"~/elisp/hooks.el"</span>)
+(load hooks-file)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Keybindings</span>
+
+(<span style="color: #51afef;">setq</span> keybindings-file <span style="color: #7bc275;">"~/elisp/keybindings.el"</span>)
+(load keybindings-file)
+
+(<span style="color: #51afef;">setq</span> modes-file <span style="color: #7bc275;">"~/elisp/modes.el"</span>)
+(load modes-file)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Packages</span>
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">(setq init-packages-file "~/elisp/init-packages.el")</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">(load init-packages-file)</span>
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">(setq ensure-packages-file "~/elisp/ensure-packages.el")</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">(load ensure-packages-file)</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-orgf6586f7" class="outline-3">
+<h3 id="orgf6586f7"><span class="section-number-3">6.1</span> package-repo.el</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+(An elisp file to define package repository details.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #62686E;">;; </span><span style="color: #62686E;">Packages</span>
+
+(<span style="color: #51afef;">require</span> '<span style="color: #a991f1;">cl</span>)
+(<span style="color: #51afef;">require</span> '<span style="color: #a991f1;">package</span>)
+(<span style="color: #51afef;">let*</span> ((no-ssl (<span style="color: #51afef;">and</span> (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (<span style="color: #51afef;">if</span> no-ssl <span style="color: #7bc275;">"http"</span> <span style="color: #7bc275;">"https"</span>)))
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired</span>
+
+  (add-to-list 'package-archives (cons <span style="color: #7bc275;">"melpa"</span> (concat proto <span style="color: #7bc275;">"://melpa.org/packages/"</span>)) t)
+
+  <span style="color: #62686E;">;;</span><span style="color: #62686E;">(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)</span>
+
+  (<span style="color: #51afef;">when</span> (&lt; emacs-major-version 24)
+
+    <span style="color: #62686E;">;; </span><span style="color: #62686E;">For important compatibility libraries like cl-lib</span>
+
+    (add-to-list 'package-archives '(<span style="color: #7bc275;">"gnu"</span> . (concat proto <span style="color: #7bc275;">"://elpa.gnu.org/packages/"</span>)))))
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">org</span>
+
+(add-to-list 'package-archives '(<span style="color: #7bc275;">"org"</span> . <span style="color: #7bc275;">"https://orgmode.org/elpa/"</span>) t)
+
+(package-initialize)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Paradox default interface</span>
+
+<span style="color: #62686E;">;;</span><span style="color: #62686E;">(paradox-enable)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org15b7449" class="outline-3">
+<h3 id="org15b7449"><span class="section-number-3">6.2</span> load-theme.el</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+(An elisp file to load all the bits of my theme.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #62686E;">;; </span><span style="color: #62686E;">load theme</span>
+
+(load-theme 'doom-vibrant t)
+(doom-modeline-mode)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">theme the visual bell</span>
+
+(doom-themes-visual-bell-config)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">theme neotree and treemacs</span>
+
+(doom-themes-neotree-config)
+(doom-themes-treemacs-config)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">theme org</span>
+
+(doom-themes-org-config)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org86db0a0" class="outline-3">
+<h3 id="org86db0a0"><span class="section-number-3">6.3</span> custom.el</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+(An elisp file for the code generated by the Emacs customize interface.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(custom-set-variables
+ <span style="color: #62686E;">;; </span><span style="color: #62686E;">custom-set-variables was added by Custom.</span>
+ <span style="color: #62686E;">;; </span><span style="color: #62686E;">If you edit it by hand, you could mess it up, so be careful.</span>
+ <span style="color: #62686E;">;; </span><span style="color: #62686E;">Your init file should contain only one such instance.</span>
+ <span style="color: #62686E;">;; </span><span style="color: #62686E;">If there is more than one, they won't work right.</span>
+ '(cider-auto-mode t)
+ '(dectalk-default-speech-rate 440)
+ '(dired-sidebar-subtree-line-prefix <span style="color: #7bc275;">"__"</span>)
+ '(dired-sidebar-theme 'icons)
+ '(dired-sidebar-use-custom-font t)
+ '(dired-sidebar-use-magit-integration t)
+ '(dired-sidebar-use-term-integration t)
+ '(dired-sidebar-width 20)
+ '(dtk-speech-rate-base 200)
+ '(dtk-speech-rate-step 100)
+ '(elfeed-feeds
+   '(<span style="color: #7bc275;">"https://www.reddit.com/r/mechanicalheadpens/.rss"</span> 
+     <span style="color: #7bc275;">"http://pragmaticemacs.com/feed/"</span> 
+     (<span style="color: #7bc275;">"http://emacs.stackexchange.com/feeds"</span> emacs)
+     (<span style="color: #7bc275;">"http://pragmaticemacs.com/feed/"</span> emacs)
+     (<span style="color: #7bc275;">"http://feeds.feedburner.com/XahsEmacsBlog"</span> emacs)
+     (<span style="color: #7bc275;">"http://planet.emacsen.org/atom.xml"</span> emacs)
+     (<span style="color: #7bc275;">"http://www.reddit.com/r/emacs/.rss"</span> emacs)
+     (<span style="color: #7bc275;">"http://rss.slashdot.org/Slashdot/slashdotMain"</span> daily)
+     (<span style="color: #7bc275;">"http://feeds.bbci.co.uk/news/rss.xml"</span> daily)))
+ '(emacspeak-speak-maximum-line-length 256)
+ '(espeak-default-speech-rate 200)
+ '(line-number-mode nil)
+ '(minimap-automatically-delete-window t)
+ '(minimap-dedicated-window t)
+ '(minimap-highlight-line t)
+ '(minimap-minimum-width 10 nil nil <span style="color: #7bc275;">"minimap min width"</span>)
+ '(minimap-width-fraction 0.03)
+ '(minimap-window-location 'right)
+ '(outloud-default-speech-rate 100)
+ '(package-selected-packages
+   '(adafruit-wisdom js3-mode rubocop rubocopfmt json-reformat clojure-mode-extra-font-locking pretty-symbols helm-jira
+ helm-open-github helm-get-files emmet-mode all-the-icons-gnus all-the-icons-ivy bind-chord ac-html-angular ac-html-bootstrap 
+ac-html-csswatcher tabbar free-keys git-gutter-fringe+ all-the-icons-dired dired-sidebar el-get realgud robe ensime scala-mode 
+wanderlust swift-mode indent-guide flycheck-rtags ivy-hydra ox-reveal solaire-mode olivetti md4rd erlang pylint org-brain tide ag 
+visual-regexp visual-regexp-steroids slack google-translate cask haskell-mode dumb-jump ob-ipython org-ref ess pdf-tools 
+salesforce-utils edn ace-flyspell ace-isearch ace-mc evil-lispy toc-org cider calfw-ical calfw-org direx direx-grep elfeed
+elfeed-goodies elfeed-org elfeed-protocol elfeed-web kaleidoscope kaleidoscope-evil-state-flash org org-plus-contrib sauron 
+browse-kill-ring ox-epub ox-html5slide ox-pandoc pabbrev adaptive-wrap bash-completion aggressive-indent company-auctex company-dict 
+company-inf-ruby company-php company-tern concurrent csv-mode diffview dismal dockerfile-mode dotnet magit-popup gnugo 
+flatland-black-theme flatland-theme phoenix-dark-pink-theme wl ac-math ac-js2 ac-ispell ac-inf-ruby ac-html ac-helm org-wunderlist 
+auto-complete-auctex auto-complete-c-headers auto-complete-chunk auto-complete-clang borg ace-window gmail2bbdb beacon-mode 
+cl-lib-highlight yari yaml-mode volatile-highlights multi-term magithub magit inf-ruby gist expand-region emms clojure-mode chess 
+coffee-mode erc-colorize erc-hl-nicks erc-status-sidebar erc-terminal-notifier erc-tweet erc-twitch erc-youtube smartparens 
+oer-reveal org-pretty-tags say-what-im-doing speechd-el dropbox org-kindle helm-ack helm-bbdb helm-c-yasnippet helm-cider
+helm-cider-history helm-dictionary helm-directory helm-elscreen helm-emmet helm-fuzzy-find helm-gitlab helm-gtags 
+helm-helm-commands helm-hoogle helm-ispell helm-mode-manager helm-notmuch helm-orgcard helm-pages helm-pass helm-robe helm-spotify  
+helm-spotify-plus helm-wordnet helm-youtube counsel-codesearch digitalocean digitalocean-helm helm-lines nerdtab org-listcruncher 
+org-make-toc tfsmacs ahk-mode ivy-yasnippet load-env-vars yasnippet-classic-snippets js2-refactor json-mode keymap-utils 
+magit-annex magit-find-file vdiff-magit which-key nhexl-mode nlinum nlinum-hl nlinum-relative nvm oauth oauth2 omnisharp org2jekyll 
+org2web pandoc pandoc-mode powerline powerline-evil powershell projectile pydoc pydoc-info sos sx auctex bug-hunter calfw calfw-cal 
+calfw-gcal cl-format cl-lib company-emoji dired-toggle dired-toggle-sudo easy-kill ein electric-case electric-operator 
+electric-spacing evil evil-avy evil-mc evil-mc-extras flycheck gitconfig gitconfig-mode github-clone github-elpa github-issues github-modern-theme
+ github-notifier github-pullrequest github-search github-stars google google-c-style graphene helm-flymake 
+history hl-indent hl-sentence ido-at-point mew minimap twittering-mode use-package vdiff virtualenv virtualenvwrapper web-mode k
+web-mode-edit-element web-search web-server websocket yasnippet yasnippet-snippets android-mode applescript-mode arduino-mode aria2 
+avy bbcode-mode bbdb beacon counsel counsel-tramp helm-backup helm-eww helm-google helm-sheet helm-swoop helm-systemd smex 
+ample-regexps helm helm-ag helm-ag-r helm-aws helm-bind-key helm-bm helm-books helm-chrome helm-codesearch helm-commandlinefu 
+helm-company helm-dired-history helm-dired-recent-dirs helm-emms helm-firefox helm-flycheck helm-flyspell helm-git helm-git-files 
+helm-git-grep helm-github-stars helm-gitignore helm-img helm-lastpass helm-ls-git helm-ls-hg helm-ls-svn helm-make helm-mt 
+helm-pydoc helm-smex helm-themes helm-tramp helm-unicode helm-w3m hide-mode-line hl-sexp hl-todo ido-occur ido-yes-or-no ioccur 
+jedi lastpass async async-await ample-theme company company-arduino company-c-headers company-irony company-jedi company-lua 
+company-math company-shell company-sourcekit company-statistics company-suggest company-try-hard company-web crux undo-tree 
+paradox))
+ '(paradox-async-display-buffer-function nil)
+ '(paradox-automatically-star t)
+ '(paradox-execute-asynchronously t)
+ '(paradox-github-token <span style="color: #7bc275;">""</span>)
+ '(tts-strip-octals nil))
+
+(custom-set-faces
+ <span style="color: #62686E;">;; </span><span style="color: #62686E;">custom-set-faces was added by Custom.</span>
+ <span style="color: #62686E;">;; </span><span style="color: #62686E;">If you edit it by hand, you could mess it up, so be careful.</span>
+ <span style="color: #62686E;">;; </span><span style="color: #62686E;">Your init file should contain only one such instance.</span>
+ <span style="color: #62686E;">;; </span><span style="color: #62686E;">If there is more than one, they won't work right.</span>
+ '(minimap-active-region-background ((t (<span style="color: #C57BDB;">:background</span> <span style="color: #7bc275;">"#7bc275"</span>)))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga894958" class="outline-3">
+<h3 id="orga894958"><span class="section-number-3">6.4</span> defs.el</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+(An elisp file for variable definitions.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #62686E;">;; </span><span style="color: #62686E;">email</span>
+
+(<span style="color: #51afef;">setq</span> user-mail-address <span style="color: #7bc275;">"jon@pielaet.net"</span>)
+
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">narrow region without comfrimation</span>
+
+(put 'narrow-to-region 'disabled nil)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">font</span>
+
+(set-frame-font <span style="color: #7bc275;">"source code pro 18"</span>)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">paradox</span>
+
+(<span style="color: #51afef;">setq</span> url-http-attempt-keepalives nil)
+(<span style="color: #51afef;">setq</span> paradox-execute-asynchronously 't)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">company</span>
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">set default `</span><span style="color: #a991f1;">company-backends</span><span style="color: #62686E;">'</span>
+(<span style="color: #51afef;">setq</span> company-backends
+      '((company-files          <span style="color: #62686E;">; </span><span style="color: #62686E;">files &amp; directory</span>
+         company-keywords       <span style="color: #62686E;">; </span><span style="color: #62686E;">keywords</span>
+         company-capf
+         company-yasnippet
+         company-ghc
+         company-dict
+         company-shell
+         company-tern
+         )
+        (company-abbrev company-dabbrev)
+        ))
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">hide pesky warnings (the lazy way of suppressing the pop-up debugger on init)</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Emacspeak frequently has some byte code that isn't happy with the existing site-lisp</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">this will prevent it from being annoying at startup but,</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">it will still show the debugger in emergencies</span>
+
+(<span style="color: #51afef;">setq</span> warning-minimum-level <span style="color: #C57BDB;">:emergency</span>)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">git-gutter+</span>
+
+(<span style="color: #51afef;">setq</span> git-gutter-fr+-side 'right-fringe)
+
+(<span style="color: #51afef;">setq</span> git-gutter+-disabled-modes '(asm-mode image-mode hexl-mode))
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">org-mode</span>
+
+(<span style="color: #51afef;">require</span> '<span style="color: #a991f1;">org</span>)
+
+(<span style="color: #51afef;">setq</span> org-log-done t)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">org-agenda</span>
+
+(<span style="color: #51afef;">setq</span> org-agenda-files (list <span style="color: #7bc275;">"~/Dropbox/Documents/Orgzly/agenda.org"</span>
+                             <span style="color: #7bc275;">"~/Dropbox/Documents/Orgzly/ToDo.org"</span>
+                             <span style="color: #7bc275;">"~/Dropbox/Documents/Orgzly/gcal.org"</span>
+                             <span style="color: #7bc275;">"~/Dropbox/Documents/Orgzly/notebook.org"</span>))
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">org-gcal</span>
+
+(<span style="color: #51afef;">setq</span> org-gcal-client-id <span style="color: #7bc275;">"xxxxxx.apps.googleusercontent.com"</span>
+org-gcal-client-secret <span style="color: #7bc275;">""</span>
+org-gcal-file-alist '((<span style="color: #7bc275;">"jon@pielaet.net"</span> . <span style="color: #7bc275;">"~/Dropbox/Documents/Orgzly/gcal.org"</span>)))
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Syntax highlighting for org export</span>
+
+(<span style="color: #51afef;">setq</span> org-latex-listings 'minted
+      org-latex-packages-alist '((<span style="color: #7bc275;">""</span> <span style="color: #7bc275;">"minted"</span>))
+      org-latex-pdf-process
+      '(<span style="color: #7bc275;">"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"</span>
+        <span style="color: #7bc275;">"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"</span>))
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb065608" class="outline-3">
+<h3 id="orgb065608"><span class="section-number-3">6.5</span> func.el</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+(An elisp file for custom function definitions.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Custom Functions</span>
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">avoid duplication of the paradox buffer if one already exists</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">otherwise create one when called</span>
+
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">visit-paradox</span> ()
+  <span style="color: #7e7e87;">"Create or visit a `</span><span style="color: #a991f1;">paradox</span><span style="color: #7e7e87;">' buffer."</span>
+  (<span style="color: #51afef;">interactive</span>)
+  (<span style="color: #51afef;">if</span> (not (get-buffer <span style="color: #7bc275;">"*Packages*"</span>))
+      (<span style="color: #51afef;">progn</span> (split-window-sensibly (selected-window))
+             (other-window 1)
+             (paradox-list-packages ()))
+    (switch-to-buffer-other-window <span style="color: #7bc275;">"*Packages*"</span>)))
+(global-set-key (kbd <span style="color: #7bc275;">"&lt;f13&gt;"</span>)
+                (<span style="color: #51afef;">lambda</span> ()
+                  (<span style="color: #51afef;">interactive</span>)
+                  (visit-paradox)))
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">gnus</span>
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">visit-gnus</span> ()
+  <span style="color: #7e7e87;">"Create or visit a gnus buffer."</span>
+  (<span style="color: #51afef;">interactive</span>)
+  (<span style="color: #51afef;">if</span> (not (get-buffer <span style="color: #7bc275;">"*Group*"</span>))
+      (<span style="color: #51afef;">progn</span> (split-window-sensibly (selected-window))
+             (other-window 1)
+             (gnus))
+    (switch-to-buffer-other-window <span style="color: #7bc275;">"*Group*"</span>)))
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">book searching</span>
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">amazon-search</span> ()
+  <span style="color: #7e7e87;">"Search amazon.com for the selected region if any, display a query prompt otherwise."</span> 
+  (<span style="color: #51afef;">interactive</span>) 
+  (browse-url (concat <span style="color: #7bc275;">"http://www.amazon.com/s/?url=search-alias%3Daps&amp;field-keywords="</span>
+(url-hexify-string (<span style="color: #51afef;">if</span> mark-active 
+(buffer-substring 
+(region-beginning) 
+(region-end)) 
+(read-string <span style="color: #7bc275;">"Amazon: "</span>))))))
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">bookshare-catalog-search</span> ()
+  <span style="color: #7e7e87;">"Search the Bookshare.org catalog for the selected region if any, display a query prompt otherwise."</span>
+  (<span style="color: #51afef;">interactive</span>)
+  (browse-url (concat <span style="color: #7bc275;">"https://www.bookshare.org/search?keyword="</span>
+(url-hexify-string (<span style="color: #51afef;">if</span> mark-active
+(buffer-substring
+(region-beginning)
+(region-end))
+(read-string <span style="color: #7bc275;">"Bookshare Catalog: "</span>))))))
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">google-books-search</span> ()
+  <span style="color: #7e7e87;">"Search Google Books for the selected region if any, display a query prompt otherwise."</span>
+  (<span style="color: #51afef;">interactive</span>)
+  (browse-url (concat <span style="color: #7bc275;">"https://www.google.com/search?tbm=bks&amp;q="</span> 
+(url-hexify-string (<span style="color: #51afef;">if</span> mark-active
+(buffer-substring
+(region-beginning)
+(region-end))
+(read-string
+ <span style="color: #7bc275;">"Google Books: "</span>))))))
+
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">powells-search</span> ()
+  <span style="color: #7e7e87;">"Search the Powell's City of Books website for the selected region if any, display a query prompt otherwise."</span>
+  (<span style="color: #51afef;">interactive</span>)
+  (browse-url (concat <span style="color: #7bc275;">"http://www.powells.com/SearchResults?kw=title:"</span>
+(url-hexify-string (<span style="color: #51afef;">if</span> mark-active
+(buffer-substring
+(region-beginning)
+(region-end))
+(read-string
+<span style="color: #7bc275;">"Powell's: "</span>))))))
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">vintage-books-search</span> ()
+  <span style="color: #7e7e87;">"Search vintage-books.com for the selected region if any, display a query prompt otherwise."</span>
+  (<span style="color: #51afef;">interactive</span>)
+  (browse-url (concat
+               <span style="color: #7bc275;">"http://www.vintage-books.com/?CLSN_2361=1457058371236132db4b040a3027589f&amp;keyword="</span>
+(url-hexify-string (<span style="color: #51afef;">if</span> mark-active
+(buffer-substring
+(region-beginning)
+(region-end))
+(read-string <span style="color: #7bc275;">"Vintage Books: "</span>))))))
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">worldcat-catalog-search</span> ()
+  <span style="color: #7e7e87;">"Search the worldcat.org catalog for the selected region if any, display a query prompt otherwise."</span>
+  (<span style="color: #51afef;">interactive</span>)
+  (browse-url (concat <span style="color: #7bc275;">"https://www.worldcat.org/search?qt=worldcat_org_all&amp;q="</span>
+(url-hexify-string (<span style="color: #51afef;">if</span> mark-active
+(buffer-substring
+(region-beginning)
+(region-end))
+(read-string
+ <span style="color: #7bc275;">"WorldCat Catalog: "</span>))))))
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">flatten all headlines in org</span>
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">flatten-org-headlines</span> ()
+  <span style="color: #7e7e87;">"Flatten all headlines in org-mode using replace-regexp"</span>
+ (<span style="color: #51afef;">interactive</span>)
+ (replace-regexp <span style="color: #7bc275;">"^</span><span style="color: #FCCE7B;">\</span><span style="color: #7bc275;">*+"</span> <span style="color: #7bc275;">"**"</span>))
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">push-minimap-over</span>
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">push-minimap-over</span> ()
+  <span style="color: #7e7e87;">"Enlarge the main window so the minimap is a reasonable size"</span>
+  (<span style="color: #51afef;">interactive</span>)
+  (enlarge-window-horizontally 100))
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">crush the whitespace in a buffer</span>
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">minify-json-buffer-contents</span>()
+  <span style="color: #7e7e87;">"Minifies the buffer contents by removing whitespaces."</span>
+  (<span style="color: #51afef;">interactive</span>)
+  (delete-whitespace-rectangle (point-min) (point-max))
+  (mark-whole-buffer)
+  (goto-char (point-min))
+  (<span style="color: #51afef;">while</span> (search-forward <span style="color: #7bc275;">"\n"</span> nil t) (replace-match <span style="color: #7bc275;">""</span> nil t)))
+
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">function to load the emacspeak setup file</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">can be bound to a key (Esc-M-s set in keybindings.el)</span>
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">start-speech</span> ()
+  <span style="color: #7e7e87;">"Start Emacspeak"</span>
+  (<span style="color: #51afef;">interactive</span>)
+  (load-file <span style="color: #7bc275;">"~/emacspeak/lisp/emacspeak-setup.el"</span>)
+  )
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">dired-sidebar</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">dired-sidebar-toggle-sidebar</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">is also bound to C-&lt;Esc&gt;</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">in keybindings.el</span>
+
+(<span style="color: #51afef;">use-package</span> <span style="color: #a991f1;">dired-sidebar</span>
+  <span style="color: #C57BDB;">:load-path</span> <span style="color: #7bc275;">"What you got from pwd."</span>
+  <span style="color: #C57BDB;">:bind</span> ((<span style="color: #7bc275;">"C-x C-n"</span> . dired-sidebar-toggle-sidebar))
+  <span style="color: #C57BDB;">:ensure</span> nil
+  <span style="color: #C57BDB;">:commands</span> (dired-sidebar-toggle-sidebar)
+  <span style="color: #C57BDB;">:config</span>
+  (<span style="color: #51afef;">use-package</span> <span style="color: #a991f1;">all-the-icons-dired</span>
+    <span style="color: #62686E;">;; </span><span style="color: #62686E;">M-x all-the-icons-install-fonts</span>
+    <span style="color: #C57BDB;">:ensure</span> t
+    <span style="color: #C57BDB;">:commands</span> (all-the-icons-dired-mode)))
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">undo-tree really hates linum</span>
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">undo-tree-visualizer-update-linum</span>
+    (<span style="color: #FCCE7B;">&amp;rest</span>
+     args)
+  (linum-update undo-tree-visualizer-parent-buffer))
+(advice-add 'undo-tree-visualize-undo
+            <span style="color: #C57BDB;">:after</span> #'undo-tree-visualizer-update-linum)
+(advice-add 'undo-tree-visualize-redo
+            <span style="color: #C57BDB;">:after</span> #'undo-tree-visualizer-update-linum)
+(advice-add 'undo-tree-visualize-undo-to-x
+            <span style="color: #C57BDB;">:after</span> #'undo-tree-visualizer-update-linum)
+(advice-add 'undo-tree-visualize-redo-to-x
+            <span style="color: #C57BDB;">:after</span> #'undo-tree-visualizer-update-linum)
+(advice-add 'undo-tree-visualizer-mouse-set
+            <span style="color: #C57BDB;">:after</span> #'undo-tree-visualizer-update-linum)
+(advice-add 'undo-tree-visualizer-set
+            <span style="color: #C57BDB;">:after</span> #'undo-tree-visualizer-update-linum)
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf30c1c5" class="outline-3">
+<h3 id="orgf30c1c5"><span class="section-number-3">6.6</span> auto-mode-alist.el</h3>
+<div class="outline-text-3" id="text-6-6">
+<p>
+(An elisp file to set automatic modes by file extension.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #62686E;">;; </span><span style="color: #62686E;">auto-mode-alist</span>
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Associate file extensions with a mode.</span>
+
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.asp\\'"</span> . web-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.aspx\\'"</span> . web-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.bash\\'"</span> . shell-script-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.bzip2\\'"</span> . dired-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.cask\\'"</span> . cask-mode ))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.css\\'"</span> . web-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.csv\\'"</span> . csv-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.dtd\\'"</span> . nxml-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.edn\\'"</span> . js3-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.elf\\'"</span> . hexl-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.exe\\'"</span> . hexl-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.gif\\'"</span> . image-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.gitignore\\'"</span> . gitignore-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.gzip\\'"</span> . dired-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.hex\\'"</span> . hexl-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.hs\\'"</span> . haskell-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.htm\\'"</span> . web-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.html\\'"</span> . web-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.ino\\'"</span> . arduino-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.jpeg\\'"</span> . image-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.jpg\\'"</span> . image-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.js\\'"</span> . js3-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.json\\'"</span> . js3-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.markdown\\'"</span> . markdown-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.md\\'"</span> . markdown-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.o\\'"</span> . hexl-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.pdf\\'"</span> . image-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.php\\'"</span> . php-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.png\\'"</span> . image-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.pyd\\'"</span> . cython-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.pyi\\'"</span> .  cython-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.pyx\\'"</span> . cython-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.rb\\'"</span> . inf-ruby-minor-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.rs\\'"</span> . rust-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.sh\\'"</span> . shell-script-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.so\\'"</span> . hexl-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.svg\\'"</span> . image-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.tar.gz\\'"</span> . dired-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.tar\\'"</span> . dired-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.tgz\\'"</span> . dired-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.tif\\'"</span> . image-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.tiff\\'"</span> . image-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.txt\\'"</span> . markdown-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.webp\\'"</span> . image-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.xhtml\\'"</span> . nxml-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.xz\\'"</span> . dired-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.zip\\'"</span> . dired-mode))
+(add-to-list 'auto-mode-alist '(<span style="color: #7bc275;">"\\.zsh\\'"</span> . shell-script-mode))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdf46ad8" class="outline-3">
+<h3 id="orgdf46ad8"><span class="section-number-3">6.7</span> hooks.el</h3>
+<div class="outline-text-3" id="text-6-7">
+<p>
+(An elisp file to set how modes interact.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #62686E;">;; </span><span style="color: #62686E;">icons in dired buffers</span>
+
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">clojure</span>
+
+(add-hook 'clojure-mode-hook #'subword-mode)
+(add-hook 'clojure-mode-hook #'smartparens-strict-mode)
+(add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+(add-hook 'clojure-mode-hook 'cider-mode)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">nlinum</span>
+
+(add-hook 'prog-mode-hook 'nlinum-mode +1)
+(add-hook 'emacs-lisp-mode-hook 'nlinum-mode +1)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">enable visual line wrapping in text modes</span>
+
+(add-hook 'text-mode-hook 'visual-line-mode)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">enable yasnippet selectively in some modes</span>
+
+(add-hook 'android-mode-hook 'yas-minor-mode +1)
+(add-hook 'arduino-mode-hook 'yas-minor-mode +1)
+(add-hook 'c++-mode-hook 'yas-minor-mode +1)
+(add-hook 'c-mode-hook 'yas-minor-mode +1)
+(add-hook 'clojure-mode-hook 'yas-minor-mode +1)
+(add-hook 'edn-mode-hook 'yas-minor-mode +1)
+(add-hook 'ein-mode-hook 'yas-minor-mode +1)
+(add-hook 'emacs-lisp-mode-hook 'yas-minor-mode +1)
+(add-hook 'go-mode-hook 'yas-minor-mode +1)
+(add-hook 'haskell-mode-hook 'yas-minor-mode +1)
+(add-hook 'java-mode-hook 'yas-minor-mode +1)
+(add-hook 'js2-mode-hook 'yas-minor-mode +1)
+(add-hook 'lisp-interaction-mode-hook 'yas-minor-mode +1)
+(add-hook 'fundemental-mode-hook 'yas-minor-mode +1)
+(add-hook 'markdown-mode-hook 'yas-minor-mode +1)
+(add-hook 'nxml-mode-hook 'yas-minor-mode +1)
+(add-hook 'org-mode-hook 'yas-minor-mode +1)
+(add-hook 'perl-mode-hook 'yas-minor-mode +1)
+(add-hook 'php-mode-hook 'yas-minor-mode +1)
+(add-hook 'python-mode-hook 'yas-minor-mode +1)
+(add-hook 'ruby-mode-hook 'yas-minor-mode +1)
+(add-hook 'rust-mode-hook 'yas-minor-mode +1)
+(add-hook 'scala-mode-hook 'yas-minor-mode +1)
+(add-hook 'shell-mode-hook 'yas-minor-mode +1)
+(add-hook 'web-mode-hook 'yas-minor-mode +1)
+(add-hook 'yaml-mode-hook 'yas-minor-mode +1)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">gnus</span>
+
+(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">company</span>
+
+(add-hook 'lisp-interaction-mode-hook
+          (<span style="color: #51afef;">lambda</span> ()
+            (set (make-local-variable 'company-backends)
+                 '(company-elisp))))
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">org-gcal-sync</span>
+
+(add-hook 'org-agenda-mode-hook (<span style="color: #51afef;">lambda</span> () (org-gcal-sync) ))
+(add-hook 'org-capture-after-finalize-hook (<span style="color: #51afef;">lambda</span> () (org-gcal-sync) ))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcc6bf56" class="outline-3">
+<h3 id="orgcc6bf56"><span class="section-number-3">6.8</span> keybindings.el</h3>
+<div class="outline-text-3" id="text-6-8">
+<p>
+(An elisp file to set custom key sequences and shortcuts in Emacs.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #62686E;">;; </span><span style="color: #62686E;">Keybindings originally for the kinesis advantage</span>
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">wizard-keys</span> ()
+  <span style="color: #7e7e87;">"keybindings for wizard-mode"</span>
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">testing keys</span>
+
+  (global-set-key (kbd <span style="color: #7bc275;">"M-&lt;up&gt;"</span>) 'backward-page)
+  (global-set-key (kbd <span style="color: #7bc275;">"M-&lt;down&gt;"</span>) 'forward-page)
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">emacspeak</span>
+
+  (global-set-key (kbd <span style="color: #7bc275;">"C-&lt;f6&gt;"</span>) 'toggle-tones)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;pause&gt;"</span>)'emacspeak-speak-buffer-interactively)
+  (global-set-key (kbd <span style="color: #7bc275;">"C-&lt;pause&gt;"</span>)'emacspeak-speak-buffer-filename)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">completion</span>
+
+  (global-set-key <span style="color: #7bc275;">"\t"</span> 'indent-relative)
+
+  <span style="color: #62686E;">;;  </span><span style="color: #62686E;">(global-set-key "\t" 'company-complete-common)</span>
+  (global-set-key (kbd <span style="color: #7bc275;">"C--"</span>) 'hippie-expand)
+  (global-set-key (kbd <span style="color: #7bc275;">"C-0"</span>) 'company-complete)
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">text scrubbing</span>
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">visual regexp</span>
+
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-q"</span>) 'vr/query-replace)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-r"</span>) 'vr/replace)
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">ag</span>
+
+  (global-set-key (kbd <span style="color: #7bc275;">"M-g d"</span>) 'ag-dired)
+  (global-set-key (kbd <span style="color: #7bc275;">"M-g f"</span>) 'ag-files)
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">avy</span>
+
+  (global-set-key (kbd <span style="color: #7bc275;">"C-&lt;Scroll_Lock&gt;"</span>) 'avy-pop-mark)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-c"</span>) 'avy-goto-char)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-w"</span>) 'avy-goto-word-0)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-l"</span>) 'avy-goto-line)
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">whitespace</span>
+
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-="</span>) 'fixup-whitespace)
+
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">thumb keys (kinesis advantage)</span>
+
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;end&gt;"</span>) 'action-key)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;prior&gt;"</span>) 'hyperbole)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;next&gt;"</span>) 'dtk-stop)
+  (global-set-key (kbd <span style="color: #7bc275;">"s-&lt;next&gt;"</span>) 'ace-window)
+  (global-set-key (kbd <span style="color: #7bc275;">"s-&lt;prior&gt;"</span>) 'ace-window)
+  (global-set-key (kbd <span style="color: #7bc275;">"C-M-&lt;next&gt;"</span>) 'next-buffer)
+  (global-set-key (kbd <span style="color: #7bc275;">"C-M-&lt;prior&gt;"</span>) 'previous-buffer)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;home&gt;"</span>) 'keyboard-escape-quit)
+  (global-set-key (kbd <span style="color: #7bc275;">"M-&lt;prior&gt;"</span>) 'scroll-down-command)
+  (global-set-key (kbd <span style="color: #7bc275;">"M-&lt;next&gt;"</span>) 'scroll-up-command)
+  (global-set-key (kbd <span style="color: #7bc275;">"M-&lt;home&gt;"</span>) 'move-beginning-of-line)
+  (global-set-key (kbd <span style="color: #7bc275;">"M-&lt;end&gt;"</span>) 'move-end-of-line)
+  (global-set-key (kbd <span style="color: #7bc275;">"C-&lt;next&gt;"</span>) 'ace-window)
+  (global-set-key (kbd <span style="color: #7bc275;">"C-&lt;prior&gt;"</span>) 'ace-window)
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">ui</span>
+
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-h"</span>) 'hyperbole)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-\\"</span>) 'hidden-mode-line-mode)
+  (global-set-key (kbd <span style="color: #7bc275;">"C-&lt;tab&gt;"</span>) 'ace-window)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; &lt;ESC&gt; &lt;ESC&gt;"</span>) 'keyboard-escape-quit)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-b"</span>) 'helm-buffers-list)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;mouse-8&gt;"</span>) 'previous-buffer)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;mouse-9&gt;"</span>)'next-buffer)
+  (global-set-key (kbd <span style="color: #7bc275;">"M-X"</span>) 'smex-major-mode-commands)
+  (global-set-key (kbd <span style="color: #7bc275;">"M-x"</span>) 'smex)
+  (global-set-key (kbd <span style="color: #7bc275;">"C-c C-c M-x"</span>) 'execute-extended-command)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;f1&gt;"</span>) 'helm-buffers-list)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;f2&gt;"</span>) 'helm-company)
+  (global-set-key (kbd <span style="color: #7bc275;">"M-&lt;f1&gt;"</span>) 'helm-mt)
+  (global-set-key (kbd <span style="color: #7bc275;">"C-&lt;f12&gt;"</span>) 'hidden-mode-line-mode)
+  (global-set-key (kbd <span style="color: #7bc275;">"C-&lt;f2&gt;"</span>)
+                  (<span style="color: #51afef;">lambda</span> ()
+                    (<span style="color: #51afef;">interactive</span>)
+                    (find-file <span style="color: #7bc275;">"~/.emacs"</span>)))
+
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;C-f3&gt;"</span>)
+                  (<span style="color: #51afef;">lambda</span> ()
+                    (<span style="color: #51afef;">interactive</span>)
+                    (switch-to-buffer <span style="color: #7bc275;">"*Messages*"</span>)))
+  (global-set-key (kbd  <span style="color: #7bc275;">"&lt;ESC&gt; M-a"</span>)
+                  (<span style="color: #51afef;">lambda</span> ()
+                    (<span style="color: #51afef;">interactive</span>)
+                    (find-file <span style="color: #7bc275;">"~/.emacs.d/mma.org"</span>)))
+
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">major modes</span>
+
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">multi-term alist</span>
+  (<span style="color: #51afef;">defcustom</span> <span style="color: #DFDFDF;">term-unbind-key-list</span> '(<span style="color: #7bc275;">"M-["</span> <span style="color: #7bc275;">"C-z"</span> <span style="color: #7bc275;">"C-x"</span> <span style="color: #7bc275;">"C-c"</span> <span style="color: #7bc275;">"C-h"</span> <span style="color: #7bc275;">"C-y"</span> <span style="color: #7bc275;">"&lt;ESC&gt;"</span>)
+    <span style="color: #7e7e87;">"The key list that will need to be unbind."</span>
+    <span style="color: #C57BDB;">:type</span> 'list
+    <span style="color: #C57BDB;">:group</span> 'multi-term)
+  (<span style="color: #51afef;">defcustom</span> <span style="color: #DFDFDF;">term-bind-key-alist</span>
+    '((<span style="color: #7bc275;">"C-c C-c"</span> . term-interrupt-subjob)
+      (<span style="color: #7bc275;">"C-p"</span> . previous-line)
+      (<span style="color: #7bc275;">"C-n"</span> . next-line)
+      (<span style="color: #7bc275;">"C-s"</span> . isearch-forward)
+      (<span style="color: #7bc275;">"C-r"</span> . isearch-backward)
+      (<span style="color: #7bc275;">"C-m"</span> . term-send-raw)
+      (<span style="color: #7bc275;">"M-f"</span> . term-send-forward-word)
+      (<span style="color: #7bc275;">"M-b"</span> . term-send-backward-word)
+      (<span style="color: #7bc275;">"M-o"</span> . term-send-backspace)
+      (<span style="color: #7bc275;">"M-p"</span> . term-send-up)
+      (<span style="color: #7bc275;">"M-n"</span> . term-send-down)
+      (<span style="color: #7bc275;">"M-M"</span> . term-send-forward-kill-word)
+      (<span style="color: #7bc275;">"M-N"</span> . term-send-backward-kill-word)
+      (<span style="color: #7bc275;">"M-r"</span> . term-send-reverse-search-history)
+      (<span style="color: #7bc275;">"M-,"</span> . term-send-input)
+      (<span style="color: #7bc275;">"M-."</span> . comint-dynamic-complete))
+    <span style="color: #7e7e87;">"The key alist that will need to be bind."</span>
+    <span style="color: #C57BDB;">:type</span> 'alist
+    <span style="color: #C57BDB;">:group</span> 'multi-term)
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">erc hide-join-part-quit-key</span>
+  (eval-after-load <span style="color: #7bc275;">"erc"</span> '(<span style="color: #51afef;">progn</span> (define-key erc-mode-map <span style="color: #7bc275;">"C-M-h"</span>
+                                   (<span style="color: #51afef;">lambda</span> ()
+                                     (<span style="color: #51afef;">interactive</span> <span style="color: #7bc275;">""</span>)
+                                     (<span style="color: #51afef;">setq</span> erc-hide-list '(<span style="color: #7bc275;">"JOIN"</span> <span style="color: #7bc275;">"PART"</span> <span style="color: #7bc275;">"QUIT"</span>))))))
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">counsel-spotify</span>
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">skip around playlists in the official spotify app via D-bus service</span>
+
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-n"</span>) 'counsel-spotify-next)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-p"</span>) 'counsel-spotify-previous)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-&lt;SPC&gt;"</span>) 'counsel-spotify-toggle-play-pause)
+
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">magit</span>
+
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-;"</span>) 'magit-status)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">mode switching</span>
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">keys to switch between different modes</span>
+
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;f5&gt;"</span>) 'nlinum-mode)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;f6&gt;"</span>) 'ispell-word)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-i"</span>) 'ispell-word)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;f7&gt;"</span>) 'flyspell-mode)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;f8&gt;"</span>) 'dired-sidebar-toggle-sidebar)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;f9&gt;"</span>) 'minimap-mode)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;f12&gt;"</span>) 'menu-bar-mode)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;C-f5&gt;"</span>) 'scroll-bar-mode)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;C-f7&gt;"</span>)'flycheck-mode)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;C-f8&gt;"</span>) 'tabbar-mode)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-R"</span>) 'yas-reload-all)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-d"</span>) 'dired)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-f"</span>) 'flyspell)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-g"</span>) 'visit-gnus)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-m"</span>) 'markdown-mode)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-o"</span>) 'org-mode)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-v"</span>) 'visit-paradox)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-s"</span>) 'start-speech)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-t"</span>) 'multi-term)
+  (global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-y"</span>) 'yas-minor-mode)
+  (global-set-key (kbd <span style="color: #7bc275;">"C-s-SPC"</span>) 'dtk-stop))
+
+(wizard-keys)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">sudo-prepend</span>
+
+(fset 'sudo-prepend-up [up home ?s ?u ?d ?o ?  end])
+(fset 'sudo-prepend [home ?s ?u ?d ?o ?  end])
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">easy-kill</span>
+
+(global-set-key [remap kill-ring-save] 'easy-kill)
+(global-set-key [remap mark-sexp] 'easy-mark)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">aptitude search key bindings for paradox</span>
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">my-paradox-mode-keys</span> ()
+  <span style="color: #7e7e87;">"Modify keymaps used by paradox to make searching easier."</span>
+  (local-set-key (kbd <span style="color: #7bc275;">"/"</span>) 'isearch-forward-regexp)
+  (local-set-key (kbd <span style="color: #7bc275;">"-"</span>) 'isearch-backward-regexp))
+(add-hook 'paradox-menu-mode-hook 'my-paradox-mode-keys)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">org-agenda</span>
+
+(define-key global-map <span style="color: #7bc275;">"\C-cl"</span> 'org-store-link)
+(define-key global-map <span style="color: #7bc275;">"\C-ca"</span> 'org-agenda)
+
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">window resizing</span>
+
+(global-set-key (kbd <span style="color: #7bc275;">"C-s-&lt;left&gt;"</span>) 'shrink-window-horizontally)
+(global-set-key (kbd <span style="color: #7bc275;">"C-s-&lt;right&gt;"</span>) 'enlarge-window-horizontally)
+(global-set-key (kbd <span style="color: #7bc275;">"C-s-&lt;down&gt;"</span>) 'shrink-window)
+(global-set-key (kbd <span style="color: #7bc275;">"C-s-&lt;up&gt;"</span>) 'enlarge-window)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">dired-sidebar</span>
+
+(global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-z"</span>) 'dired-sidebar-toggle-sidebar)
+(global-set-key (kbd <span style="color: #7bc275;">"C-&lt;escape&gt;"</span>) 'dired-sidebar-toggle-sidebar)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">paradox upgrade packages </span>
+
+(global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-u"</span>) 'paradox-upgrade-packages)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">mini</span>
+
+(global-set-key (kbd <span style="color: #7bc275;">"&lt;ESC&gt; M-/"</span>) 'minimap-mode)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">atreus window keys</span>
+
+(global-set-key (kbd <span style="color: #7bc275;">"C-x p"</span>) 'delete-window)
+(global-set-key (kbd <span style="color: #7bc275;">"C-x q"</span>) 'delete-other-windows)
+(global-set-key (kbd <span style="color: #7bc275;">"C-x w"</span>) 'split-window-below)
+(global-set-key (kbd <span style="color: #7bc275;">"C-x t"</span>) 'make-frame-command)
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9c8c74c" class="outline-3">
+<h3 id="org9c8c74c"><span class="section-number-3">6.9</span> modes.el</h3>
+<div class="outline-text-3" id="text-6-9">
+<p>
+(An elisp file to customize modes. This includes, global modes, and 
+the initialization of the Emacspeak text-to-speech subsystem.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">smex</span>
+
+(smex-initialize)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">global modes</span>
+
+(global-company-mode)
+(global-magit-file-mode)
+(global-prettify-symbols-mode)
+(solaire-global-mode)
+(smartparens-global-mode)
+(global-undo-tree-mode)
+(global-git-gutter+-mode)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Emacspeak (global-voice-lock-mode)</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">uncomment the following line to load speech during init</span>
+
+(load-file <span style="color: #7bc275;">"~/emacspeak/lisp/emacspeak-setup.el"</span>)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">livedown</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">live markdown previews in the browser</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/shime/emacs-livedown</span>
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">This package is NOT in MELPA</span>
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">install it manually and then uncomment these lines</span>
+
+<span style="color: #62686E;">;;</span><span style="color: #62686E;">(add-to-list 'load-path "~/.emacs.d/elpa/livedown")</span>
+<span style="color: #62686E;">;;</span><span style="color: #62686E;">(load "livedown")</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org716550d" class="outline-3">
+<h3 id="org716550d"><span class="section-number-3">6.10</span> init-packages.el</h3>
+<div class="outline-text-3" id="text-6-10">
+<p>
+(An elisp file to make sure the package management tools are installed.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #62686E;">;; </span><span style="color: #62686E;">Make sure async, paradox, and use-package are installed before proceeding to install other packages</span>
+
+(<span style="color: #51afef;">defvar</span> <span style="color: #DFDFDF;">init-packages</span>
+  '(async <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/jwiegley/emacs-async</span>
+paradox <span style="color: #62686E;">;; </span><span style="color: #62686E;">paradox  ;; https://github.com/Malabarba/paradox</span>
+use-package) <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/jwiegley/use-package</span>
+<span style="color: #7e7e87;">"A list of packages to init are installed at launch."</span>)
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">init-packages-package-installed-p</span> (p)
+  (<span style="color: #51afef;">cond</span> ((package-installed-p p) t)
+        (t nil)))
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">init-packages-installed-p</span> ()
+  (mapcar 'init-packages-package-installed-p init-packages))
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">init-packages-install-missing</span> ()
+  (<span style="color: #51afef;">interactive</span>)
+  (<span style="color: #51afef;">unless</span> (every 'identity (init-packages-installed-p))
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">check for new packages (package versions)</span>
+  (message <span style="color: #7bc275;">"%s"</span> <span style="color: #7bc275;">"Emacs is now refreshing its package database..."</span>)
+  (package-refresh-contents)
+  (message <span style="color: #7bc275;">"%s"</span> <span style="color: #7bc275;">" done."</span>)
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">install the missing packages</span>
+  (<span style="color: #51afef;">dolist</span> (p init-packages)
+    (<span style="color: #51afef;">when</span> (not (package-installed-p p))
+      (package-install p)))))
+
+(<span style="color: #51afef;">provide</span> '<span style="color: #a991f1;">init-packages</span>)
+
+(init-packages-install-missing)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5ec2046" class="outline-3">
+<h3 id="org5ec2046"><span class="section-number-3">6.11</span> ensure-packages.el</h3>
+<div class="outline-text-3" id="text-6-11">
+<p>
+(An elisp file to ensure Emacs packages are installed.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #62686E;">;; </span><span style="color: #62686E;">Make sure these packages are installed</span>
+
+(<span style="color: #51afef;">defvar</span> <span style="color: #DFDFDF;">ensure-packages</span>
+  '(ac-cider <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/clojure-emacs/ac-cider</span>
+ac-clang <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/yaruopooner/ac-clang</span>
+ac-helm  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/yasuyk/ac-helm</span>
+ac-html  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/cheunghy/ac-html</span>
+ac-html-angular <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/osv/ac-html-bootstrap</span>
+ac-html-bootstrap <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/osv/ac-html-bootstrap</span>
+ac-html-csswatcher  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/osv/ac-html-csswatcher</span>
+ac-inf-ruby <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/purcell/ac-inf-ruby</span>
+ac-ispell  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/syohex/emacs-ac-ispell</span>
+ac-js2  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/ScottyB/ac-js2</span>
+ac-math <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/vitoshka/ac-math</span>
+ac-php <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/xcwen/ac-php</span>
+ac-rtags <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://rtags.net</span>
+ace-flyspell <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/cute-jumper/ace-flyspell</span>
+ace-isearch <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/tam17aki/ace-isearch</span>
+ace-link <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/abo-abo/ace-link</span>
+ace-mc <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/mm--/ace-mc</span>
+ace-window <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/abo-abo/ace-window</span>
+adafruit-wisdom <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/gonewest818/adafruit-wisdom.el</span>
+adaptive-wrap <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://elpa.gnu.org/packages/adaptive-wrap.html</span>
+adjust-parens <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://elpa.gnu.org/packages/adjust-parens.html</span>
+aggressive-indent <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Malabarba/aggressive-indent-mode</span>
+all-the-icons-dired <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/jtbm37/all-the-icons-dired</span>
+all-the-icons-gnus <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/nlamirault/all-the-icons-gnus</span>
+all-the-icons-ivy <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/asok/all-the-icons-ivy</span>
+ample-regexps <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/immerrr/ample-regexps.el</span>
+ample-theme   <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/jordonbiondo/ample-theme</span>
+android-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/remvee/android-mode</span>
+applescript-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/ieure/applescript-mode</span>
+arduino-mode  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/stardiviner/arduino-mode</span>
+auctex <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://www.gnu.org/software/auctex/</span>
+avy  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/abo-abo/avy</span>
+bash-completion <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/szermatt/emacs-bash-completion</span>
+bbdb <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://elpa.gnu.org/packages/bbdb.html</span>
+beacon <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Malabarba/beacon</span>
+bind-chord <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/waymondo/use-package-chords</span>
+browse-kill-ring <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/browse-kill-ring/browse-kill-ring</span>
+bug-hunter  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Malabarba/elisp-bug-hunter</span>
+calfw  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/kiwanami/emacs-calfw</span>
+calfw-gcal <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/myuhe/calfw-gcal.el</span>
+calfw-ical <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/kiwanami/emacs-calfw</span>
+calfw-org <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/kiwanami/emacs-calfw</span>
+cask <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/cask/cask</span>
+chess  <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://elpa.gnu.org/packages/chess.html</span>
+cider <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://www.github.com/clojure-emacs/cider</span>
+cider-decompile <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://www.github.com/clojure-emacs/cider-decompile</span>
+clj-refactor <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/clojure-emacs/clj-refactor.el</span>
+cljr-helm <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/philjackson/cljr-helm</span>
+clojure-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/clojure-emacs/clojure-mode</span>
+clojure-mode-extra-font-locking <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/clojure-emacs/clojure-mode</span>
+coffee-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/defunkt/coffee-mode/</span>
+company <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://company-mode.github.io/</span>
+company-arduino <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/yuutayamada/company-arduino</span>
+company-auctex <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/alexeyr/company-auctex/</span>
+company-c-headers <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/randomphrase/company-c-headers</span>
+company-dict <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/hlissner/emacs-company-dict</span>
+company-ghc <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/iquiw/company-ghc</span>
+company-go <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/mdempsky/gocode</span>
+company-inf-ruby <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/company-mode/company-inf-ruby</span>
+company-irony <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Sarcasm/company-irony/</span>
+company-jedi <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/syohex/emacs-company-jedi</span>
+company-math <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/vspinu/company-math</span>
+company-php <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/xcwen/ac-php</span>
+company-rtags <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://rtags.net</span>
+company-shell <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Alexander-Miller/company-shell</span>
+company-statistics <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/company-mode/company-statistics</span>
+company-suggest <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/juergenhoetzel/company-suggest</span>
+company-tern <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/proofit404/company-tern</span>
+company-try-hard <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Wilfred/company-try-hard</span>
+company-web <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/osv/company-web</span>
+concurrent <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/kiwanami/emacs-deferred/</span>
+counsel <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/abo-abo/swiper</span>
+counsel-tramp <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/masasam/emacs-counsel-tramp</span>
+crux <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/bbatsov/crux</span>
+csv-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://elpa.gnu.org/packages/csv-mode.html</span>
+cython-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/cython/cython</span>
+diff-hl <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/dgutov/diff-hl</span>
+diffview <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/mgalgs/diffview-mode</span>
+dired-sidebar <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/jojojames/dired-sidebar</span>
+direx <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/m2ym/direx-el</span>
+direx-grep <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/aki2o/direx-grep</span>
+dismal <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://elpa.gnu.org/packages/dismal.html</span>
+dockerfile-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/spotify/dockerfile-mode</span>
+doom-modeline <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/seagle0128/doom-modeline</span>
+doom-themes <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/hlissner/emacs-doom-theme</span>
+dotnet <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/julienXX/dotnet.el</span>
+dropbox <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/pavpanchekha/dropbox.el</span>
+dumb-jump <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/jacktasia/dumb-jump</span>
+easy-kill  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/leoliu/easy-kill</span>
+edn <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://www.github.com/expez/edn.el</span>
+ein  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/millejoh/emacs-ipython-notebook</span>
+el-get <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://www.emacswiki.org/emacs/el-get</span>
+elfeed  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/skeeto/elfeed</span>
+elfeed-goodies <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/algernon/elfeed-goodies</span>
+elfeed-org <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/remyhonig/elfeed-org</span>
+elfeed-protocol <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/fasheng/elfeed-protocol</span>
+elfeed-web <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/skeeto/elfeed</span>
+elisp-format  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Yuki-Inoue/elisp-format</span>
+elisp-lint <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/gonewest818/elisp-lint/</span>
+emmet-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/smihica/emmet-mode</span>
+emms <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://www.gnu.org/software/emms/</span>
+ensime <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/ensime/ensime-emacs</span>
+erc-colorize <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/thisirs/erc-colorize.git</span>
+erc-hl-nicks <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://www.github.com/leathekd/erc-hl-nicks</span>
+erc-status-sidebar <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/drewbarbs/erc-status-sidebar</span>
+erc-tweet  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/kidd/erc-tweet.el</span>
+erc-twitch <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/vibhavp/erc-twitch</span>
+erc-youtube <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/kidd/erc-youtube.el</span>
+erlang <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/erlang/otp</span>
+ess <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://ess.r-project.org/</span>
+evil-lispy <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/sp3ctum/evil-lispy</span>
+evil-mc  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/gabesoft/evil-mc</span>
+evil-mc-extras <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/gabesoft/evil-mc-extras</span>
+expand-region <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/magnars/expand-region.el</span>
+flycheck <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://www.flycheck.org</span>
+flycheck-rtags <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://rtags.net</span>
+free-keys <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Fuco1/free-keys</span>
+gist <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/defunkt/gist.el</span>
+git-gutter+ <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/nonsequitur/git-gutter-plus</span>
+git-gutter-fringe+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/nonsequitur/git-gutter-fringe-plus</span>
+github-explorer <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/TxGVNN/github-explorer</span>
+gmail2bbdb <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/redguardtoo/gmail2bbdb</span>
+gnugo <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://www.gnuvola.org/software/gnugo/</span>
+go-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/dominikh/go-mode.el</span>
+google-c-style <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/google/styleguide</span>
+google-translate <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/atykhonov/google-translate</span>
+haskell-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/haskell/haskell-mode~</span>
+helm <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://emacs-helm.github.io/helm/</span>
+helm-ag <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/syohex/emacs-helm-ag</span>
+helm-ag-r <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/yuutayamada/helm-ag-r</span>
+helm-aws <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/istib/helm-aws</span>
+helm-chrome <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/kawabata/helm-chrome</span>
+helm-cider <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/clojure-emacs/helm-cider</span>
+helm-cider-history <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Kungi/helm-cider-history</span>
+helm-company <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Sodel-the-Vociferous/helm-company</span>
+helm-dired-history <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/jixiuf/helm-dired-history</span>
+helm-dired-recent-dirs <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/yynozk/helm-dired-recent-dirs </span>
+helm-emmet <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/yasuyk/helm-emmet</span>
+helm-emms <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/emacs-helm/helm-emms</span>
+helm-eww <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/emacs-helm/helm-eww</span>
+helm-git <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/maio/helm-git</span>
+helm-git-files <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/kenbeese/helm-git-files</span>
+helm-git-grep <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/yasuyk/helm-git-grep</span>
+helm-github-stars <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Sliim/helm-github-stars</span>
+helm-gitignore <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/jupl/helm-gitignore</span>
+helm-google <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://framagit.org/steckerhalter/helm-google</span>
+helm-flycheck <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/yasuyk/helm-flycheck</span>
+helm-flyspell <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/pronobis/helm-flyspell</span>
+helm-ispell <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/syohex/emacs-helm-ispell</span>
+helm-jira <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/DeX3/helm-jira</span>
+helm-lines <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/torgeir/helm-lines.el/</span>
+helm-lastpass <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/xuchunyang/helm-lastpass</span>
+helm-ls-git <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/emacs-helm/helm-ls-git</span>
+helm-make <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/abo-abo/helm-make</span>
+helm-mt <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/dfdeshom/helm-mt</span>
+helm-open-github <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/syohex/emacs-helm-open-github</span>
+helm-org-rifle <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/alphapapa/helm-org-rifle</span>
+helm-rtags <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://rtags.net</span>
+helm-smex <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/ptrv/helm-smex</span>
+helm-spotify-plus  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/wandersoncferreira/helm-spotify-plus</span>
+helm-swoop <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/ShingoFukuyama/helm-swoop</span>
+helm-systemd <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Lompik/helm-systemd</span>
+helm-tramp <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/masasam/emacs-helm-tramp</span>
+helm-unicode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/bomgar/helm-unicode</span>
+helm-w3m <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/emacs-helm/helm-w3m</span>
+helm-wordnet <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/raghavgautam/helm-wordnet</span>
+helm-youtube <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/maximus12793/helm-youtube</span>
+hide-mode-line <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/hlissner/emacs-hide-mode-line</span>
+hyperbole <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://www.gnu.org/software/hyperbole</span>
+indent-guide <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://hins11.yu-yake.com/</span>
+inf-clojure  <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/clojure-emacs/inf-clojure</span>
+inf-ruby <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/nonsequitur/inf-ruby</span>
+ivy-hydra <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/abo-abo/swiper</span>
+ivy-rtags <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://rtags.net</span>
+ioccur  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/thierryvolpiatto/ioccur</span>
+jedi <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/tkf/emacs-jedi</span>
+js3-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/tamzinblake/js3-mode</span>
+json-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/joshwnj/json-mode</span>
+json-reformat <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/gongo/json-reformat</span>
+kaleidoscope <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/algernon/kaleidoscope.el</span>
+kaleidoscope-evil-state-flash <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/algernon/kaleidoscope.el</span>
+magit <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/magit/magit</span>
+magit-annex  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/magit/magit-annex</span>
+magit-lfs <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/ailrun/magit-lfs</span>
+magit-popup <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/magit/magit-popup</span>
+magithub <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/vermiculus/magithub</span>
+matlab-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://sourceforge.net/projects/matlab-emacs/</span>
+md4rd <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/ahungry/md4rd</span>
+minimap <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://elpa.gnu.org/packages/minimap.html</span>
+multi-term <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://www.emacswiki.org/emacs/download/multi-term.el</span>
+neotree <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/jaypei/emacs-neotree</span>
+nlinum <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://elpa.gnu.org/packages/nlinum.html</span>
+oauth <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/psanford/emacs-oauth</span>
+ob-ipython <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://www.gregsexton.org</span>
+olivetti <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/rnkn/olivetti</span>
+omnisharp <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Omnisharp/omnisharp-emacs</span>
+org <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://orgmode.org/</span>
+org-brain <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/Kungsgeten/org-brain</span>
+org-download <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/abo-abo/org-download</span>
+org-jira <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/ahungry/org-jira</span>
+org-journal <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/bastibe/org-journal</span>
+org-mind-map <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/theodorewiles/org-mind-map</span>
+org-plus-contrib <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://orgmode.org/</span>
+org-pomodoro <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/lolownia/org-pomodoro</span>
+org-projectile <span style="color: #62686E;">;;</span><span style="color: #62686E;">https://github.com/IvanMalison/org-projectile</span>
+org-projectile-helm <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/IvanMalison/org-projectile</span>
+org-ref <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/jkitchin/org-ref</span>
+org-timeline <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Fuco1/org-timeline/</span>
+org-web-tools <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/alphapapa/org-web-tools</span>
+org2jekyll <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/ardumont/org2jekyll</span>
+ox-epub <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/ofosos/org-epub</span>
+ox-html5slide <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/coldnew/org-html5slide</span>
+ox-pandoc <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/kawabata/ox-pandoc</span>
+ox-reveal <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/yjwen/org-reveal</span>
+pabbrev <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/phillord/pabbrev</span>
+pandoc-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/joostkremers/pandoc-mode</span>
+pdf-tools <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/politza/pdf-tools</span>
+pdf-view-restore <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/007kevin/pdf-view-restore</span>
+pianobar <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/agrif/pianobar.el</span>
+powerline <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/milkypostman/powerline/</span>
+powershell <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/jschaf/powershell.el</span>
+projectile  <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/bbatsov/projectile</span>
+pretty-symbols <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/drothlis/pretty-symbols</span>
+pylint <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/PyCQA/pylint</span>
+realgud <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/realgud/realgud/</span>
+robe <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/dgutov/robe</span>
+rubocop <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/rubocop-hq/rubocop-emacs</span>
+rubocopfmt <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/jimeh/rubocopfmt.el</span>
+salesforce-utils <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/grimnebulin/emacs-salesforce</span>
+sauron <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/djcb/sauron</span>
+scala-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/ensime/emacs-scala-mode</span>
+slack <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/yuya373/emacs-slack</span>
+smartparens <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Fuco1/smartparens</span>
+smex <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/nonsequitur/smex/</span>
+solaire-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/hlissner/emacs-solaire-mode</span>
+swift-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/swift-emacs/swift-mode</span>
+sx <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/vermiculus/sx.el/</span>
+tabbar <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/dholm/tabbar</span>
+tide <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/ananthakumaran/tide</span>
+toc-org <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/snosov1/toc-org</span>
+treemacs <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/Alexander-Miller/treemacs</span>
+undo-tree <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://www.dr-qubit.org/emacs.php</span>
+vdiff <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/justbur/emacs-vdiff</span>
+virtualenvwrapper  <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/porterjamesj/virtualenvwrapper.el</span>
+visual-regexp <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/benma/visual-regexp.el</span>
+visual-regexp-steroids <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/benma/visual-regexp-steroids.el</span>
+wanderlust <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/wanderlust/wanderlust</span>
+web-server <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/eschulte/emacs-web-server</span>
+websocket <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/ahyatt/emacs-websocket</span>
+which-key <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/justbur/emacs-which-key</span>
+yaml-mode <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/yoshiki/yaml-mode</span>
+yari <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/hron/yari.el</span>
+yasnippet  <span style="color: #62686E;">;; </span><span style="color: #62686E;">http://github.com/joaotavora/yasnippet</span>
+yasnippet-snippets <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/AndreaCrotti/yasnippet-snippets</span>
+ztree) <span style="color: #62686E;">;; </span><span style="color: #62686E;">https://github.com/fourier/ztree</span>
+<span style="color: #7e7e87;">"A list of packages to ensure are installed at launch."</span>)
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">ensure-packages-package-installed-p</span> (p)
+  (<span style="color: #51afef;">cond</span> ((package-installed-p p) t)
+        (t nil)))
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">ensure-packages-installed-p</span> ()
+  (mapcar 'ensure-packages-package-installed-p ensure-packages))
+
+(<span style="color: #51afef;">defun</span> <span style="color: #5cEfFF;">ensure-packages-install-missing</span> ()
+  (<span style="color: #51afef;">interactive</span>)
+  (<span style="color: #51afef;">unless</span> (every 'identity (ensure-packages-installed-p))
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">check for new packages (package versions)</span>
+  (message <span style="color: #7bc275;">"%s"</span> <span style="color: #7bc275;">"Emacs is now refreshing its package database..."</span>)
+  (package-refresh-contents)
+  (message <span style="color: #7bc275;">"%s"</span> <span style="color: #7bc275;">" done."</span>)
+  <span style="color: #62686E;">;; </span><span style="color: #62686E;">install the missing packages</span>
+  (<span style="color: #51afef;">dolist</span> (p ensure-packages)
+    (<span style="color: #51afef;">when</span> (not (package-installed-p p))
+      (package-install p)))))
+
+(<span style="color: #51afef;">provide</span> '<span style="color: #a991f1;">ensure-packages</span>)
+
+<span style="color: #62686E;">;; </span><span style="color: #62686E;">Uncomment this to install missing packages during init</span>
+
+(ensure-packages-install-missing)
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org84afac8" class="outline-2">
+<h2 id="org84afac8"><span class="section-number-2">7</span> A Thank You</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Many people have contributed to my knowlege, and implementation of Emacs.
+I would like to thank the following people for their help, and wisdom:
+</p>
+
+<p>
+<a href="https://batsov.com/">Bozhidar Batsov,</a>
+<a href="https://sachachua.com/blog/">Sacha Chua</a>,
+<a href="https://github.com/purcell">Steve Purcell</a>,
+<a href="http://emacspeak.sourceforge.net/raman/">T.V. Raman</a>,
+<a href="http://xahlee.org/">Xah Lee</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdafe371" class="outline-2">
+<h2 id="orgdafe371"><span class="section-number-2">8</span> License</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+<br>
+Made with <a href="https://orgmode.org/">org-mode</a> and <a href="https://www.latex-project.org/">\(\LaTeX\)</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Jon Pielaet</p>
+<p class="date">Created: 2019-05-19 Sun 17:41</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
