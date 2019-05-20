@@ -2,19 +2,18 @@
 #+AUTHOR: Jon Pielaet
 #+OPTIONS: date:nil
 #+LATEX_HEADER: \usepackage[margin=0.3in]{geometry}
-#+BEGIN_CENTER
 	
 /This is an example of a GNU Emacs configuration for use/ /with the Emacspeak text-to-speech system./
 /Emacspeak is a software package that extends GNU Emacs (Emacs)/
 /with powerful text-to-speech capabilities and enables people/
 /with limited or no vision to use Emacs./
 /Although Emacs is a text editor, it can also be programmed/ 
-to do many other tasks. As shown by this configuration,
+/to do many other tasks. As shown by this configuration,/
 
 /Emacs can be used for just about anything./
-From staying organized with todo lists, to reading news, chatting online,
-/controling media players, or using multiple terminal emulators,
-you can do all of it with Emacs./
+/From staying organized with todo lists, to reading news, chatting online,/
+/controling media players, or using multiple terminal emulators,/
+/you can do all of it with Emacs./
    
 /This configuration  has been customized for use with many/
 /programming languages and applications./
@@ -24,7 +23,7 @@ you can do all of it with Emacs./
 /Emacs Lisp language. (elisp) Each configuration file is included/
 /below and can be used as a working example of how to use elisp/
 /to customize Emacs./
-#+END_CENTER
+
 
 * Background 
 In 2015, I started diving deeper into [[https://www.gnu.org/software/emacs/][GNU Emacs]] because I saw its
@@ -43,11 +42,9 @@ Although the learning curve is very high, Emacs rewards the user with an almost 
 This means that if you don't like how something works, you can change it yourself. It's this extensibility that gives Emacs and Emacspeak their seamingly magical powers.
 
 * Building Emacs and Emacspeak
-
 Before you are able to make use of the elisp in this configuration you will need to have Emacs
 and [[http://emacspeak.sourceforge.net/][Emacspeak]] installed.
 I like to use the latest versions of both so I build from the source code.
-
 ** Required Disk Space
 
 You should have about **two gigabytes** of storage free to be able to build the source code and run the configuration.
@@ -56,7 +53,6 @@ Although the final installed footprint is a much smaller, **300 megabytes** nomi
 ** Compiling Emacs with Emacspeak on 64-bit Ubuntu
 
 /(This example is for 64-bit Ubuntu but it may work on other [[https://distrowatch.com/search.php?basedon=Debian][Debian-based GNU/Linux distrobutions.]])/
-
 
 =1. Make source code repositories available to apt by uncommenting=
 
@@ -120,7 +116,7 @@ sed -e "\$aDTK_PROGRAM=espeak" ~/.bashrc
 source ~/.bashrc
 #+END_SRC
 
-* Clone My Configuration Repository
+* Configuration Repository
 Cloning a copy of the repository will make it easy to use the configuration without needing to make all the files from scratch.
 
 #+BEGIN_SRC bash :tangle yes
@@ -128,24 +124,32 @@ git clone https://github.com/leavesofgrass/elisp ~/
 #+END_SRC
 
 * Installing the Emacs Lisp Packages
-The very first time you run Emacs, you will want to tell the software
-to download some packages before you can use the configuration.
-I suggest installing the rest of the packages before you use Emacs too.
-** Installing the Package Manager
+** Using git
+Using git to clone all of the packages at once is the fastest way to get started.
+
+#+BEGIN_SRC bash :tangle yes
+git clone https://github.com/leavesofgrass/.emacs.d ~/
+#+END_SRC
+** Using Emacs
+You can also install most of the packages using Emacs itself.
+
+*** Installing the Package Manager
+
 Running the following from the command line will define package repos and install
 the paradox package manager.
 
 #+BEGIN_SRC bash 
 emacs -Q -batch -l ~/elisp/package-repo.el ~/elisp/init-packages.el
 #+END_SRC
-** Installing the Remaining Packages
+*** Installing the Remaining Packages
 After paradox is installed, running the following will install the rest of the elisp packages asynchronously.
 
 #+BEGIN_SRC bash 
 emacs -Q -batch -l ~/elisp/package-repo.el ~/elisp/ensure-packages.el
 #+END_SRC
 
-Doing this before trying to use Emacs will help prevent any issues due to missing packages.
+Putting the packages in place before you run Emacs, either by using git, or by running these elisp files in batch mode, will prevent problems caused by missing elisp packages.
+
 * early-init.el
 (An elisp file for code to evaluate before any packages start.)
 
@@ -1354,13 +1358,17 @@ ztree) ;; https://github.com/fourier/ztree
 Many people have contributed to my knowlege, and implementation of Emacs.
 I would like to thank the following people for their help, and wisdom:
 
+
+
 [[https://batsov.com/][Bozhidar Batsov,]]
 [[https://sachachua.com/blog/][Sacha Chua]],
 [[https://github.com/purcell][Steve Purcell]],
 [[http://emacspeak.sourceforge.net/raman/][T.V. Raman]],
 [[http://xahlee.org/][Xah Lee]]
 
-* License
+* License 
 This work is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) license.
 
 https://creativecommons.org/licenses/by/4.0/
+
+Made with [[https://orgmode.org/][org-mode]]
