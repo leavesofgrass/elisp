@@ -398,6 +398,11 @@ paradox))
 (An elisp file for variable definitions.)
 
  #+BEGIN_SRC emacs-lisp :tangle yes
+
+;; backups
+
+(setq backup-directory-alist `(("." . "~/.saves")))
+      
 ;; email
 
 (setq user-mail-address "jon@pielaet.net")
