@@ -12,7 +12,7 @@
 to do many other tasks. As shown by this configuration,
 
 /Emacs can be used for just about anything./
-/From staying organized with todo lists, to reading news, chatting online,
+From staying organized with todo lists, to reading news, chatting online,
 /controling media players, or using multiple terminal emulators,
 you can do all of it with Emacs./
    
