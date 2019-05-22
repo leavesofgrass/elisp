@@ -17,20 +17,12 @@
 ;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 ;; Floor, Boston, MA 02110-1301, USA.
 
-;; load theme
-
-(load-theme 'doom-vibrant t)
-(doom-modeline-mode)
-
-;; theme the visual bell
-
-(doom-themes-visual-bell-config)
-
-;; theme neotree and treemacs
-
-(doom-themes-neotree-config)
-(doom-themes-treemacs-config)
-
-;; theme org
-
-(doom-themes-org-config)
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-vibrant t)
+  (doom-modeline-mode)
+  (doom-themes-org-config)
+  (doom-themes-neotree-config)
+  (doom-themes-treemacs-config)
+  (doom-themes-visual-bell-config))
