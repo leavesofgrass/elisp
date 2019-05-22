@@ -62,6 +62,7 @@ calfw  ;; https://github.com/kiwanami/emacs-calfw
 calfw-gcal ;; https://github.com/myuhe/calfw-gcal.el
 calfw-ical ;; https://github.com/kiwanami/emacs-calfw
 calfw-org ;; https://github.com/kiwanami/emacs-calfw
+captain ;; http://elpa.gnu.org/packages/captain.html
 cask ;; http://github.com/cask/cask
 chess  ;; http://elpa.gnu.org/packages/chess.html
 cider ;; http://www.github.com/clojure-emacs/cider
