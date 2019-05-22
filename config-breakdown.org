@@ -1225,7 +1225,15 @@ company-try-hard ;; https://github.com/Wilfred/company-try-hard
 company-web ;; https://github.com/osv/company-web
 concurrent ;; https://github.com/kiwanami/emacs-deferred/
 counsel ;; https://github.com/abo-abo/swiper
+counsel-bbdb ;; https://github.com/redguard/counsel-bbdb
+counsel-css ;; https://github.com/hlissner/emacs-counsel-css
+counsel-etags ;; http://github.com/redguardtoo/counsel-etags
+counsel-gtags ;; https://github.com/syohex/emacs-counsel-gtags
+counsel-org-capture-string ;; https://github.com/akirak/counsel-org-capture-string
+counsel-projectile ;; https://github.com/ericdanan/counsel-projectile
+counsel-pydoc ;; https://github.com/co-dh/pydoc_utils
 counsel-tramp ;; https://github.com/masasam/emacs-counsel-tramp
+counsel-world-clock ;; https://github.com/kchenphy/counsel-world-clock
 crux ;; https://github.com/bbatsov/crux
 csv-mode ;; http://elpa.gnu.org/packages/csv-mode.html
 cython-mode ;; https://github.com/cython/cython
