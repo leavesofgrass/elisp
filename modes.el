@@ -47,6 +47,11 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/livedown")
 (load "livedown")
 
+;; server
+
+(require 'server)
+(if (not (server-running-p)) (server-start))
+
 ;; use-package
 
 (use-package avy
@@ -127,6 +132,13 @@
   :ensure t
   :config
   (helm-projectile-on))
+
+(use-package lsp-mode :commands lsp :ensure t)
+(use-package lsp-ui :commands lsp-ui-mode :ensure t)
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp
+  :config (push 'company-lsp company-backends))
 
 (use-package smartparens
   :ensure t

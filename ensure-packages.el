@@ -82,6 +82,7 @@ company-go ;; https://github.com/mdempsky/gocode
 company-inf-ruby ;; https://github.com/company-mode/company-inf-ruby
 company-irony ;; https://github.com/Sarcasm/company-irony/
 company-jedi ;; https://github.com/syohex/emacs-company-jedi
+company-lsp ;; https://github.com/tigersoldier/company-lsp
 company-math ;; https://github.com/vspinu/company-math
 company-php ;; https://github.com/xcwen/ac-php
 company-rtags ;; http://rtags.net
@@ -220,6 +221,7 @@ kaleidoscope ;; https://github.com/algernon/kaleidoscope.el
 kaleidoscope-evil-state-flash ;; https://github.com/algernon/kaleidoscope.el
 lastpass ;; https://github.com/storvik/emacs-lastpass
 lsp-mode ;; https://github.com/emacs-lsp/lsp-mode
+lsp-ui ;; https://github.com/emacs-lsp/lsp-ui
 lua-mode ;; http://immerrr.github.com/lua-mode
 magit ;; https://github.com/magit/magit
 magit-annex  ;; https://github.com/magit/magit-annex
