@@ -59,7 +59,7 @@ Although the final installed footprint is a much smaller, **300 megabytes** nomi
 =1. Make source code repositories available to apt by uncommenting=
 
 #+BEGIN_SRC bash :tangle yes
-sudo sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list
+sudo sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list > /etc/apt/sources.list
 #+END_SRC
 
 =2. Update sources list=
@@ -74,7 +74,7 @@ sudo apt upgrade -y
 
 =4. Install some dependencies=
 #+BEGIN_SRC bash :tangle yes
-sudo apt install git tclx8.4-dev -y && sudo apt-get build-dep emacs25 emacspeak -y
+sudo apt install git sox tclx8.6-dev -y && sudo apt-get build-dep emacs25 emacspeak -y
 #+END_SRC
 =5. Fetch GNU Emacs source code with git=
 #+BEGIN_SRC bash :tangle yes
@@ -107,9 +107,9 @@ make outloud && sudo make install
 =(change espeak to outloud if you want to use outloud!)=
 
 #+BEGIN_SRC bash :tangle yes
-sed -e "\$aexport DTK_PROGRAM" ~/.bashrc
+sed -e "\$aexport DTK_PROGRAM" ~/.bashrc > ~/.bashrc 
 
-sed -e "\$aDTK_PROGRAM=espeak" ~/.bashrc
+sed -e "\$aDTK_PROGRAM=espeak" ~/.bashrc > ~/.bashrc 
 #+END_SRC
 
 =11. Source the config file so the shell recognizes the changes=
