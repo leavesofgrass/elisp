@@ -74,7 +74,7 @@ sudo apt upgrade -y
 
 =4. Install some dependencies=
 #+BEGIN_SRC bash :tangle yes
-sudo apt install git sox tclx8.6-dev -y && sudo apt-get build-dep emacs25 emacspeak -y
+sudo apt install git sox tclx8.4-dev -y && sudo apt-get build-dep emacs25 emacspeak -y
 #+END_SRC
 =5. Fetch GNU Emacs source code with git=
 #+BEGIN_SRC bash :tangle yes
