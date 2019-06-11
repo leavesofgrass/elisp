@@ -33,7 +33,7 @@
 
 ;; font
 
-(set-frame-font "source code pro 18")
+;;(set-frame-font "source code pro 18")
 
 ;; paradox
 

@@ -35,7 +35,7 @@
 ;; Emacspeak (global-voice-lock-mode)
 ;; uncomment the following line to load speech during init
 
-(load-file "~/emacspeak/lisp/emacspeak-setup.el")
+;;(load-file "~/emacspeak/lisp/emacspeak-setup.el")
 
 ;; livedown
 ;; live markdown previews in the browser
@@ -44,8 +44,8 @@
 ;; This package is NOT in MELPA
 ;; install it manually and then uncomment these lines
 
-(add-to-list 'load-path "~/.emacs.d/elpa/livedown")
-(load "livedown")
+;;(add-to-list 'load-path "~/.emacs.d/elpa/livedown")
+;;(load "livedown")
 
 ;; server
 
