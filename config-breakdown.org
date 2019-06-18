@@ -78,11 +78,13 @@ sudo apt install git sox tclx8.4-dev -y && sudo apt-get build-dep emacs25 emacsp
 #+END_SRC
 =5. Fetch GNU Emacs source code with git=
 #+BEGIN_SRC bash :tangle yes
-git clone -b master https://git.savannah.gnu.org/git/emacs.git ~/
+cd ~/
+git clone -b master https://git.savannah.gnu.org/git/emacs.git
 #+END_SRC
 =6. Fetch Emacspeak source code with git=
 #+BEGIN_SRC bash :tangle yes
-git clone https://github.com/tvraman/emacspeak ~/
+cd ~/
+git clone https://github.com/tvraman/emacspeak 
 #+END_SRC
 
 =7. Build and install GNU Emacs=
@@ -130,7 +132,8 @@ git clone https://github.com/leavesofgrass/elisp ~/
 Using git to clone all of the packages at once is the fastest way to get started.
 
 #+BEGIN_SRC bash :tangle yes
-git clone https://github.com/leavesofgrass/.emacs.d ~/
+cd ~/
+git clone https://github.com/leavesofgrass/.emacs.d
 #+END_SRC
 ** Using Emacs
 You can also install most of the packages using Emacs itself.
