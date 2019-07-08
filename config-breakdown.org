@@ -50,7 +50,7 @@ I like to use the latest versions of both so I build from the source code.
 ** Required Disk Space
 
 You should have about **two gigabytes** of storage free to be able to build the source code and run the configuration.
-Although the final installed footprint is a much smaller, **300 megabytes** nominally, the development libraries and build depenencies create bulk. These can of course be remove once the installation is complete, if they are no longer needed. This can greatly conserve disk space.
+Although the final installed footprint is a much smaller, **500 megabytes** nominally, the development libraries and build depenencies create bulk. These can of course be remove once the installation is complete, if they are no longer needed. This can greatly conserve disk space.
 
 ** Compiling Emacs with Emacspeak on 64-bit Ubuntu
 
@@ -92,7 +92,7 @@ git clone https://github.com/tvraman/emacspeak
 cd ~/emacs
 ./autogen.sh && ./configure --with-imagemagick && make && sudo make install
 #+END_SRC
-=8. Build Emacspeak and install=
+=8. Build and install Emacspeak=
 #+BEGIN_SRC bash :tangle yes
 cd ~/emacspeak 
 make && sudo make install
