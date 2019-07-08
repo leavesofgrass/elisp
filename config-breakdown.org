@@ -109,9 +109,10 @@ make outloud && sudo make install
 =(change espeak to outloud if you want to use outloud!)=
 
 #+BEGIN_SRC bash :tangle yes
-sed -e "\$aexport DTK_PROGRAM" ~/.bashrc > ~/.bashrc 
 
-sed -e "\$aDTK_PROGRAM=espeak" ~/.bashrc > ~/.bashrc 
+echo "export DTK_PROGRAM" >> ~/.bashrc
+echo "DTK_PROGRAM=outloud" >> ~/.bashrc
+
 #+END_SRC
 
 =11. Source the config file so the shell recognizes the changes=
