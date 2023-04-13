@@ -1,19 +1,10 @@
 # My Emacs Configuration
-
 For a detailed guide take a look at [config-breakdown.org](https://github.com/leavesofgrass/elisp/blob/master/config-breakdown.org).
 
 I’ve broken my Emacs configuration down into different files.
 
-### early-init.el
-(An elisp file for code to run before any packages start.)
 
-Usually stored in `~/.emacs.d/`
-
-* init tweaks (get rid of `blink-cursor-mode`, `menu-bar-mode`, `tool-bar-mode`, `scroll-bar-mode`, `inhibit-startup-message`, `visual-bell`, `defalias 'yes-or-no-p 'y-or-n-p`)
-
-* UTF-8 encoding (prefer utf-8-unix for both display and editing)
-
-My init file `~/.emacs` bootstraps the following files:
+My init file `~/.emacs` sets some basic UI settings and bootstraps the following files:
 
 ### package-repo.el
 (An elisp file to define package repository details.)

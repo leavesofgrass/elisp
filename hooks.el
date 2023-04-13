@@ -18,21 +18,18 @@
 ;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 ;; Floor, Boston, MA 02110-1301, USA.
 
+;; display-line-numbers
+
+(add-hook 'shell-script-mode-hook 'display-line-numbers-mode)
+(add-hook 'emacs-lisp-mode-hook 'display-line-numbers-mode)
+
+;; minimap
+
+;;(add-hook 'emacs-lisp-mode-hook 'minimap-mode)
+
 ;; icons in dired buffers
 
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-
-;; clojure
-
-(add-hook 'clojure-mode-hook #'subword-mode)
-(add-hook 'clojure-mode-hook #'smartparens-strict-mode)
-(add-hook 'clojure-mode-hook #'aggressive-indent-mode)
-(add-hook 'clojure-mode-hook 'cider-mode)
-
-;; nlinum
-
-(add-hook 'prog-mode-hook 'nlinum-mode +1)
-(add-hook 'emacs-lisp-mode-hook 'nlinum-mode +1)
 
 ;; enable visual line wrapping in text modes
 
@@ -44,7 +41,6 @@
 (add-hook 'arduino-mode-hook 'yas-minor-mode +1)
 (add-hook 'c++-mode-hook 'yas-minor-mode +1)
 (add-hook 'c-mode-hook 'yas-minor-mode +1)
-(add-hook 'clojure-mode-hook 'yas-minor-mode +1)
 (add-hook 'edn-mode-hook 'yas-minor-mode +1)
 (add-hook 'ein-mode-hook 'yas-minor-mode +1)
 (add-hook 'emacs-lisp-mode-hook 'yas-minor-mode +1)

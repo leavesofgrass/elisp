@@ -180,7 +180,7 @@
   (global-set-key (kbd "<ESC> M-m") 'markdown-mode)
   (global-set-key (kbd "<ESC> M-o") 'org-mode)
   (global-set-key (kbd "<ESC> M-v") 'visit-paradox)
-  (global-set-key (kbd "<ESC> M-s") 'start-speech)
+  (global-set-key (kbd "<ESC> M-s") 'start-emacspeak)
   (global-set-key (kbd "<ESC> M-t") 'multi-term)
   (global-set-key (kbd "<ESC> M-y") 'yas-minor-mode)
   (global-set-key (kbd "C-s-SPC") 'dtk-stop))

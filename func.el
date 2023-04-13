@@ -24,6 +24,7 @@
 ;; otherwise create one when called
 
 ;; undo-tree really hates linum
+
 (defun undo-tree-visualizer-update-linum
     (&rest
      args)
@@ -40,6 +41,7 @@
             :after #'undo-tree-visualizer-update-linum)
 (advice-add 'undo-tree-visualizer-set
             :after #'undo-tree-visualizer-update-linum)
+;;paradox
 
 (defun visit-paradox ()
   "Create or visit a `paradox' buffer."
@@ -55,6 +57,7 @@
                   (visit-paradox)))
 
 ;; gnus
+
 (defun visit-gnus ()
   "Create or visit a gnus buffer."
   (interactive)
@@ -64,102 +67,116 @@
              (gnus))
     (switch-to-buffer-other-window "*Group*")))
 
-;; book searching
+;; searching
+ 
 (defun amazon-search ()
   "Search amazon.com for the selected region if any, display a query prompt otherwise." 
   (interactive) 
-  (browse-url (concat "http://www.amazon.com/s/?url=search-alias%3Daps&field-keywords="
-(url-hexify-string (if mark-active 
-(buffer-substring 
-(region-beginning) 
-(region-end)) 
-(read-string "Amazon: "))))))
+	(browse-url (concat "http://www.amazon.com/s/?url=search-alias%3Daps&field-keywords="
+		(url-hexify-string (if mark-active 
+			(buffer-substring 
+				(region-beginning) 
+					(region-end)) 
+						(read-string "Amazon: "))))))
 
+(defun youtube-web-search ()
+  "Search YouTube for the selected region if any, display a query prompt otherwise."
+  (interactive)
+	(browse-url (concat "https://www.youtube.com/results?search_query="
+		(url-hexify-string (if mark-active
+			(buffer-substring
+				(region-beginning)
+					(region-end))
+						(read-string "YouTube: "))))))				
+						
+(defun bard-catalog-search ()
+  "Search the NLS BARD catalog for the selected region if any, display a query prompt otherwise."
+  (interactive)
+	(browse-url (concat "https://nlsbard.loc.gov/nlsbardprod/search/collection/srch/"
+		(url-hexify-string (if mark-active
+			(buffer-substring
+				(region-beginning)
+					(region-end))
+						(read-string "BARD Catalog: "))))))						
+ 
 (defun bookshare-catalog-search ()
   "Search the Bookshare.org catalog for the selected region if any, display a query prompt otherwise."
   (interactive)
-  (browse-url (concat "https://www.bookshare.org/search?keyword="
-(url-hexify-string (if mark-active
-(buffer-substring
-(region-beginning)
-(region-end))
-(read-string "Bookshare Catalog: "))))))
-
+	(browse-url (concat "https://www.bookshare.org/search?keyword="
+		(url-hexify-string (if mark-active
+			(buffer-substring
+				(region-beginning)
+					(region-end))
+						(read-string "Bookshare Catalog: "))))))
+ 
 (defun google-books-search ()
   "Search Google Books for the selected region if any, display a query prompt otherwise."
   (interactive)
-  (browse-url (concat "https://www.google.com/search?tbm=bks&q=" 
-(url-hexify-string (if mark-active
-(buffer-substring
-(region-beginning)
-(region-end))
-(read-string
- "Google Books: "))))))
-
-
+	(browse-url (concat "https://www.google.com/search?tbm=bks&q=" 
+		(url-hexify-string (if mark-active
+			(buffer-substring
+				(region-beginning)
+					(region-end))
+						(read-string "Google Books: "))))))
+ 
 (defun powells-search ()
   "Search the Powell's City of Books website for the selected region if any, display a query prompt otherwise."
   (interactive)
-  (browse-url (concat "http://www.powells.com/SearchResults?kw=title:"
-(url-hexify-string (if mark-active
-(buffer-substring
-(region-beginning)
-(region-end))
-(read-string
-"Powell's: "))))))
-
+	(browse-url (concat "http://www.powells.com/SearchResults?kw=title:"
+		(url-hexify-string (if mark-active
+			(buffer-substring
+				(region-beginning)
+					(region-end))
+						(read-string "Powell's: "))))))
+ 
 (defun vintage-books-search ()
   "Search vintage-books.com for the selected region if any, display a query prompt otherwise."
   (interactive)
-  (browse-url (concat
-               "http://www.vintage-books.com/?CLSN_2361=1457058371236132db4b040a3027589f&keyword="
-(url-hexify-string (if mark-active
-(buffer-substring
-(region-beginning)
-(region-end))
-(read-string "Vintage Books: "))))))
-
+	(browse-url (concat "http://www.vintage-books.com/?CLSN_2361=1457058371236132db4b040a3027589f&keyword="
+		(url-hexify-string (if mark-active
+			(buffer-substring
+				(region-beginning)
+					(region-end))
+						(read-string "Vintage Books: "))))))
+ 
 (defun worldcat-catalog-search ()
   "Search the worldcat.org catalog for the selected region if any, display a query prompt otherwise."
   (interactive)
-  (browse-url (concat "https://www.worldcat.org/search?qt=worldcat_org_all&q="
-(url-hexify-string (if mark-active
-(buffer-substring
-(region-beginning)
-(region-end))
-(read-string
- "WorldCat Catalog: "))))))
+	(browse-url (concat "https://www.worldcat.org/search?qt=worldcat_org_all&q="
+		(url-hexify-string (if mark-active
+			(buffer-substring
+				(region-beginning)
+					(region-end))
+						(read-string "WorldCat Catalog: "))))))
 
 ;; flatten all headlines in org
-
+ 
 (defun flatten-org-headlines ()
   "Flatten all headlines in org-mode using replace-regexp"
  (interactive)
- (replace-regexp "^\*+" "**"))
-
+	(replace-regexp "^\*+" "**"))
+ 
 ;; push-minimap-over
-
+ 
 (defun push-minimap-over ()
   "Enlarge the main window so the minimap is a reasonable size"
   (interactive)
-  (enlarge-window-horizontally 100))
-
+	(enlarge-window-horizontally 100))
+ 
 ;; crush the whitespace in a buffer
-
+ 
 (defun minify-json-buffer-contents()
   "Minifies the buffer contents by removing whitespaces."
   (interactive)
-  (delete-whitespace-rectangle (point-min) (point-max))
-  (mark-whole-buffer)
-  (goto-char (point-min))
-  (while (search-forward "\n" nil t) (replace-match "" nil t)))
-
-
+	(delete-whitespace-rectangle (point-min) (point-max))
+		(mark-whole-buffer)
+			(goto-char (point-min))
+				(while (search-forward "\n" nil t) (replace-match "" nil t)))
+ 
 ;; function to load the emacspeak setup file
 ;; can be bound to a key (Esc-M-s set in keybindings.el)
-
-(defun start-speech ()
+ 
+(defun start-emacspeak ()
   "Start Emacspeak"
   (interactive)
-  (load-file "~/emacspeak/lisp/emacspeak-setup.el")
-  )
+	(load-file "/home/jon/emacspeak/lisp/emacspeak-setup.el"))

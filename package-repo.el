@@ -27,19 +27,3 @@
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 
 (package-initialize)
-
-;; init-packages
-
-(unless (package-installed-p 'async)
-  (package-refresh-contents)
-  (package-install 'async))
-
-(unless (package-installed-p 'paradox)
-  (package-refresh-contents)
-  (package-install 'paradox))
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(paradox-enable)

@@ -19,30 +19,27 @@
 
 ;; Make sure async, paradox, and use-package are installed before proceeding to install other packages
 
-(defvar init-packages
-  '(async ;; https://github.com/jwiegley/emacs-async
-paradox ;; paradox  ;; https://github.com/Malabarba/paradox
-use-package) ;; https://github.com/jwiegley/use-package
-"A list of packages to init are installed at launch.")
 
-(defun init-packages-package-installed-p (p)
-  (cond ((package-installed-p p) t)
-	(t nil)))
-
-(defun init-packages-installed-p ()
-  (mapcar 'init-packages-package-installed-p init-packages))
-
-(defun init-packages-install-missing ()
-  (interactive)
-  ;; check for new packages (package versions)
-  (message "%s" "Emacs is now refreshing its package database..."))
+(unless (package-installed-p 'async)
   (package-refresh-contents)
-  (message "%s" " done.")
-  ;; install the missing packages
-  (dolist (p init-packages)
-    (when (not (package-installed-p p))
-      (package-install p)))
+  (package-install 'async))
+ 
+(unless (package-installed-p 'paradox)
+  (package-refresh-contents)
+  (package-install 'paradox))
 
-(provide 'init-packages)
+(paradox-enable)
 
-(init-packages-install-missing)
+(unless (package-installed-p 'smex)
+  (package-refresh-contents)
+  (package-install 'smex))
+ 
+(unless (package-installed-p 'doom-themes)
+  (package-refresh-contents)
+  (package-install 'doom-themes))
+
+(unless (package-installed-p 'doom-modeline)
+  (package-refresh-contents)
+  (package-install 'doom-modeline))
+  
+  

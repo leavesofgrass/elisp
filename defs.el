@@ -48,10 +48,9 @@
          company-keywords       ; keywords
          company-capf
          company-yasnippet
-	 company-ghc
-	 company-dict
-	 company-shell
-	 company-tern
+		 company-dict
+		 company-shell
+		 company-tern
          )
         (company-abbrev company-dabbrev)
         ))

@@ -25,7 +25,7 @@
 (add-to-list 'auto-mode-alist '("\\.aspx\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.bash\\'" . shell-script-mode))
 (add-to-list 'auto-mode-alist '("\\.bzip2\\'" . dired-mode))
-(add-to-list 'auto-mode-alist '("\\.cask\\'" . cask-mode ))
+(add-to-list 'auto-mode-alist '("\\.cask\\'" . cask-mode))
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.csv\\'" . csv-mode))
 (add-to-list 'auto-mode-alist '("\\.dtd\\'" . nxml-mode))
