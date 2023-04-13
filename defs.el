@@ -31,10 +31,6 @@
 
 (put 'narrow-to-region 'disabled nil)
 
-;; font
-
-;;(set-frame-font "source code pro 18")
-
 ;; paradox
 
 (setq url-http-attempt-keepalives nil)

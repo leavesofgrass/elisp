@@ -3,7 +3,6 @@ For a detailed guide take a look at [config-breakdown.org](https://github.com/le
 
 I’ve broken my Emacs configuration down into different files.
 
-
 My init file `~/.emacs` sets some basic UI settings and bootstraps the following files:
 
 ### package-repo.el
