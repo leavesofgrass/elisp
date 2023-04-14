@@ -98,7 +98,7 @@ cd ~/emacspeak
 make && sudo make install
 #+END_SRC
 
-=9. Build optional speech server (I use IBM ViaVoice Outloud which gets installed before this)=
+=9. Build optional speech server (I use the IBM ViaVoice Outloud server with Voxin from [ [https://oralux.org/] [Oralux] ] which gets installed before this)=
 #+BEGIN_SRC bash :tangle yes
 cd ~/emacspeak
 make outloud && sudo make install
