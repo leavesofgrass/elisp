@@ -8,7 +8,7 @@ My init file `~/.emacs` sets some basic UI settings and bootstraps the following
 ### package-repo.el
 (An elisp file to define package repository details.)
 
-* Package repositories ([GNU ELPA](https://elpa.gnu.org/), [MELPA](https://melpa.org/), [Org](https://orgmode.org/elpa.html))
+* Package repositories ([GNU ELPA](https://elpa.gnu.org/), [MELPA](https://melpa.org/)
 
 ### load-theme.el
 (An elisp file to load all the bits of my theme.)
