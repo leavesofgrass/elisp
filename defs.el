@@ -46,7 +46,6 @@
          company-yasnippet
 		 company-dict
 		 company-shell
-		 company-tern
          )
         (company-abbrev company-dabbrev)
         ))

@@ -233,10 +233,6 @@ emacs -Q -batch -l ~/elisp/package-repo.el ~/elisp/ensure-packages.el
 
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 
-;; org
-
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-
 (package-initialize)
 
 ;; Paradox default interface
@@ -1032,8 +1028,8 @@ I would like to thank the following people for their help, and wisdom:
 [[https://sachachua.com/blog/][Sacha Chua]],
 [[https://github.com/purcell][Steve Purcell]],
 [[http://emacspeak.sourceforge.net/raman/][T.V. Raman]],
-[[http://xahlee.org/][Xah Lee]],
-[[https://oralux.org/contact.php][Gilles Casse]]
+[[http://xahlee.info/][Xah Lee]],
+[[https://oralux.org/][Gilles Casse]]
 
 * This file may not be updated as frequently as the rest of the repository
 
