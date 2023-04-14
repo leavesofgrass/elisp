@@ -1028,13 +1028,12 @@ Many people have contributed to my knowlege, and implementation of Emacs.
 I would like to thank the following people for their help, and wisdom:
 
 
-
 [[https://batsov.com/][Bozhidar Batsov,]]
 [[https://sachachua.com/blog/][Sacha Chua]],
 [[https://github.com/purcell][Steve Purcell]],
 [[http://emacspeak.sourceforge.net/raman/][T.V. Raman]],
-[[http://xahlee.org/][Xah Lee]]
-
+[[http://xahlee.org/][Xah Lee]],
+[[https://oralux.org/contact.php][Gilles Casse]]
 
 * This file may not be updated as frequently as the rest of the repository
 
