@@ -43,7 +43,7 @@ My init file `~/.emacs` sets some basic UI settings and bootstraps the following
 * [Hooks](https://www.gnu.org/software/emacs/manual/html_node/elisp/Hooks.html) 
 
 	*Examples:*
-  - use line numbers in some modes and not others
+  - use line numbers in some modes and not others `display-line-numbers-mode`
   - load [yasnippet](https://github.com/joaotavora/yasnippet) selectively in some modes
   - use `visual-line-mode` to visually wrap lines in text modes
 
@@ -72,4 +72,4 @@ My init file `~/.emacs` sets some basic UI settings and bootstraps the following
 ### ensure-packages.el
 (An elisp file to ensure Emacs packages are installed.)
 
-Installs the remaining Emacs Lisp packages if they are not already installed.
+Installs the remaining elisp packages if they are not already installed.
