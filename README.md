@@ -29,7 +29,6 @@ My init file `~/.emacs` sets some basic UI settings and bootstraps the following
 ### defs.el
 (An elisp file for variable definitions.)
 
-* set `default-frame-font`
 * various `setq`
 
 ### func.el
