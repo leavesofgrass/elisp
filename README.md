@@ -61,7 +61,7 @@ My init file `~/.emacs` sets some basic UI settings and bootstraps the following
 (An elisp file to customize modes. This includes, global modes, and the initialization of the [Emacspeak](https://github.com/tvraman/emacspeak) text-to-speech subsystem.) 
 
 * Activate global modes [smex](https://github.com/nonsequitur/smex)
-* [Undo-Tree](https://elpa.gnu.org/packages/undo-tree.html))
+* [Undo-Tree](https://elpa.gnu.org/packages/undo-tree.html)
 * Loading of [Emacspeak](https://github.com/tvraman/emacspeak) `(load-file emacspeak-setup.el)`
 
 ### init-packages.el
