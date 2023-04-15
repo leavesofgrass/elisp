@@ -72,4 +72,3 @@
   (doom-themes-neotree-config)
   (doom-themes-treemacs-config)
   (doom-themes-visual-bell-config))
-  
