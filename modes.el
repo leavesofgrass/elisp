@@ -25,8 +25,8 @@
 (smex-initialize)
 
 ;; global modes
-(global-undo-tree-mode)
 
+(global-undo-tree-mode)
 
 ;; Emacspeak (global-voice-lock-mode)
 ;; uncomment the following line to load speech during init

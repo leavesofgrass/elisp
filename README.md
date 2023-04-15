@@ -62,15 +62,15 @@ My init file `~/.emacs` sets some basic UI settings and bootstraps the following
 * [Org-mode](https://orgmode.org/) configuration (flatten-org-headlines, org-agenda, org-capture, [org-gcal](https://github.com/kidd/org-gcal.el))
 * [Gnus](https://www.gnu.org/software/emacs/manual/html_node/gnus/index.html) configuration (Gmail, regexp sorting mostly in `~/.gnus`)
 * Loading of [Emacspeak](https://github.com/tvraman/emacspeak) `(load-file emacspeak-setup.el)`
-* Manual setup of [livedown.el](https://github.com/shime/emacs-livedown) (Realtime Markdown previews for Emacs)
-  - If it isn't present, Emacs init will break. To avoid this, comment out the livedown lines in `modes.el`
 
 ### init-packages.el
-(An elisp file to make sure the package management tools are installed.)
+(An elisp file to make sure the package management tools, mode-line and theme are installed before other things happen.)
 
 * `async`
 * `paradox`
-* `use-package`
+* `smex`
+* `doom-theme`
+
 
 ### ensure-packages.el
 (An elisp file to ensure Emacs packages are installed.)

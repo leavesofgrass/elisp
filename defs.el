@@ -72,20 +72,6 @@
 
 ;; org-agenda
 
-(setq org-agenda-files (list "~/Dropbox/Documents/Orgzly/agenda.org"
-			     "~/Dropbox/Documents/Orgzly/ToDo.org"
-			     "~/Dropbox/Documents/Orgzly/gcal.org"
-			     "~/Dropbox/Documents/Orgzly/notebook.org"))
-
-
-;; syntax highlighting
-
-(setq org-latex-listings 'minted
-      org-latex-packages-alist '(("" "minted"))
-      org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-
-;; default margin org-latex
-
-(setq org-latex-packages-alist '(("margin=2cm" "geometry" nil)))
+(setq org-agenda-files (list "~/Documents/agenda.org"
+			     "~/Documents/ToDo.org"
+			     "~/Documents/notebook.org"))
