@@ -883,10 +883,6 @@
   (package-refresh-contents)
   (package-install 'org-make-toc))
 
-(unless (package-installed-p 'org-plus-contrib)
-  (package-refresh-contents)
-  (package-install 'org-plus-contrib))
-
 (unless (package-installed-p 'org-pretty-tags)
   (package-refresh-contents)
   (package-install 'org-pretty-tags))
