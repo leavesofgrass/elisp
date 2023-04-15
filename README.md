@@ -11,8 +11,11 @@ My init file `~/.emacs` sets some basic UI settings and bootstraps the following
 * Package repositories ([GNU ELPA](https://elpa.gnu.org/) and [MELPA](https://melpa.org/))
 
 ### load-theme.el
-(An elisp file to load all the bits of my theme.)
+(An elisp file to load UI tweaks and all the bits of my theme.)
 
+* Hide menu-bar, tool-bar and scroll-bar
+* Y or N for Yes or No dialogs
+* UTF-8 Encoding
 * Activate `doom-vibrant` from [doom-themes](https://github.com/hlissner/emacs-doom-themes) (with `doom-modeline-mode`, `doom-themes-neotree`,
 `doom-themes-org`, `doom-themes-treemacs`, `doom-themes-visual-bell`)
 
