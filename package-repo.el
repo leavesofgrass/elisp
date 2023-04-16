@@ -22,7 +22,8 @@
 
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+;; GNU ELPA is defined by default uncommenting here duplicates the whole repo in paradox
+;;(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
 (package-initialize)

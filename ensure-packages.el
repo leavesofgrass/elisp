@@ -107,6 +107,10 @@
   (package-refresh-contents)
   (package-install 'ample-regexps))
 
+(unless (package-install-p 'apt-sources-list)
+(package-refresh-contents)
+(package-install 'apt-sources-list))
+  
 (unless (package-installed-p 'arduino-mode)
   (package-refresh-contents)
   (package-install 'arduino-mode))
