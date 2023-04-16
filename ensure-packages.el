@@ -143,6 +143,10 @@
   (package-refresh-contents)
   (package-install 'auto-complete-clang))
 
+(unless (package-installed-p 'auto-correct)
+  (package-refresh-contents)
+  (package-install 'auto-correct))
+
 (unless (package-installed-p 'avy)
   (package-refresh-contents)
   (package-install 'avy))
